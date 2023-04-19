@@ -3,9 +3,7 @@
 </script>
 
 <template>
-  <main>
     <div>
-      Welcome!
+      Placeholder view.
     </div>
-  </main>
 </template>
