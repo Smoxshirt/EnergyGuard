@@ -9,6 +9,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/">Home </RouterLink>
         <RouterLink to="/overview">Overview </RouterLink>
         <RouterLink to="/placeholder">Placeholder </RouterLink>
+        <RouterLink to="/devices">Devices</RouterLink>
       </nav>
     </div>
 
