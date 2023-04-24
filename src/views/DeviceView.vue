@@ -1,25 +1,43 @@
-<script setup>
-    function onButtonClick(click) {
-        //toggle button state on click between on/off
-        buttonClickEvent();
-    }
-
-
+<script>
+export default {
+  methods: {
+    toggle(device) {
+      device.isActive = !device.isActive;
+    },
+  },
+  data() {
+    return {
+        devices: [
+            {id: 1, name: 'DeviceName 1', status: 'DeviceStatus', isActive: false },
+            {id: 2, name: 'DeviceName 2', status: 'DeviceStatus', isActive: false },
+            {id: 3, name: 'DeviceName 3', status: 'DeviceStatus', isActive: false },
+            {id: 4, name: 'DeviceName 4', status: 'DeviceStatus', isActive: false },
+            {id: 5, name: 'DeviceName 5', status: 'DeviceStatus', isActive: false }
+        ],
+    };
+  },
+};
 </script>
 
 <template>
-    <div>
-        <div class="device">
+    <div class="devices-container">
+        <div class="device" v-for="device in devices" :key="device.id">
             <div class="device-content">
-                <h3>DeviceName 1</h3>
-                <p>Status: DeviceStatus</p>
+                <h3>{{ device.name }}</h3>
+                <p>Status: {{ device.status }}</p>
             </div>
-            <button onClick={onButtonClick} class="on-off-button">On/Off</button>
+            <button class="on-off-button" :class="[device.isActive ? 'green' : 'red']" @click="toggle(device)">{{ device.isActive ? 'ON' : 'OFF' }}</button>
         </div>
     </div>
 </template>
 
 <style scoped>
+.devices-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .device {
     width: 600px;
     height: 125px;
@@ -50,11 +68,11 @@
     outline: none;
 }
 
-.on-off-button:hover {
+.green {
     background-color: #45a049;
 }
 
-.on-off-button:active {
+.red {
     background-color: #c41f1f;
 }
 
