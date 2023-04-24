@@ -19,7 +19,9 @@ export default {
             this.model.setEmail(mail);
         },
         logout(){
-            this.model.isSignedIn = false;
+            if(confirm("Are you sure you want to log out?")){
+                this.model.isSignedIn = false;
+            }
         }
     },
     props: {
