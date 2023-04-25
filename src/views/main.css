@@ -1,0 +1,17 @@
+.buttons {
+    cursor: pointer;
+    height: 50px;
+    width: 100px;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.buttons2 {
+    cursor: pointer;
+    height: 30px;
+    width: 80px;
+    border-radius: 6px;
+    padding: 5px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}

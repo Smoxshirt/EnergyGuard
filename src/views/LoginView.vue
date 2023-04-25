@@ -1,4 +1,5 @@
 <script>
+    import './main.css';
     export default {
         methods: {
             mailChange(e){
@@ -36,9 +37,9 @@
         <input type="password" @change="passwordChange" placeholder="Password" />
     </div>
     <div>
-        <button @click="submit">Submit</button>
+        <button @click="submit" class="buttons2">Submit</button>
     </div>
     <div v-if="this.isSignedIn">
-      <button @click="logout">Log out</button>
+      <button @click="logout" class="buttons2">Log out</button>
     </div>
 </template>
