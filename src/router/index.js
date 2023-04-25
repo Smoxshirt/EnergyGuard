@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import PlaceHolderView from '../views/PlaceHolderView.vue'
 import LoginPresenter from '../presenters/LoginPresenter.vue'
+import DetailsPresenter from '../presenters/DetailsPresenter.vue'
 import DeviceView from '../views/DeviceView.vue'
 
 const router = createRouter({
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/devices',
       name: 'Devices',
       component: DeviceView
+    },
+    {
+      path: '/details',
+      name: 'Details',
+      component: DetailsPresenter
     }
   ]
 })

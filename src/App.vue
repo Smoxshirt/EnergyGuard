@@ -35,6 +35,8 @@ import HelloWorld from './components/HelloWorld.vue'
           <RouterLink to="/login" class="buttons">Login</RouterLink>
           &nbsp;&nbsp;
           <RouterLink to="/devices" class="buttons">Devices</RouterLink>
+          &nbsp;&nbsp;
+          <RouterLink to="/details" class="buttons">Details</RouterLink>
         </h4>
 
     </header>
