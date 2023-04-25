@@ -24,7 +24,13 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
     <header>
-
+      <div class="dropdown">
+        <button class="dropdown-button">
+         <div class="dropdown-icon"></div>
+         <div class="dropdown-icon"></div>
+         <div class="dropdown-icon"></div>
+        </button>
+        <div class="dropdown-content">
         <h4>
           <RouterLink to="/" class="buttons">Home</RouterLink>
           &nbsp;&nbsp;
@@ -35,7 +41,15 @@ import HelloWorld from './components/HelloWorld.vue'
           <RouterLink to="/login" class="buttons">Login</RouterLink>
           &nbsp;&nbsp;
           <RouterLink to="/devices" class="buttons">Devices</RouterLink>
+          
+
         </h4>
+
+        </div>
+
+
+      </div>
+
 
     </header>
 
