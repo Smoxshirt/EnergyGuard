@@ -4,7 +4,7 @@
 */
 
 import firebaseConfig from "./firebaseConfig";
-//import energyModel from "/energyModel.js";
+import energyModel from "/energyModel.js";
 
 // Instructions from Firebase.
 import {initializeApp} from "firebase/app";
