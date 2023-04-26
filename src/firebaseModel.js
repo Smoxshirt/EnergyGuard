@@ -4,7 +4,7 @@
 */
 
 import firebaseConfig from "./firebaseConfig";
-import energyModel from "/energyModel.js";
+import EnergyModel from "./EnergyModel";
 
 // Instructions from Firebase.
 import {initializeApp} from "firebase/app";
@@ -17,30 +17,24 @@ const auth = getAuth(app);
 
 const REF="EnergyGuard";
 
-const hubID=1;
-
-function createAccount (email, password) {
-    /*
-    createUserWithEmailAndPassword(auth, email, password)
-    .then(function handleSignUp (userCredential) {
-            // Signed in
-            const user = userCredential.user;
-            //model.setUser(user.email);
-            set(ref(database, REF + "/users/"+ user.uid + "/hub/"), hubID);
-            //model.setAuthErrorMessage(null);
-        }
-    )
-    .catch(function handleError (error) {
-            const errorCode = error.code;
-            console.log(errorCode);
-            //model.setAuthErrorMessage(errorCode);
-        }
-        
-    );
-    */
-    set(ref(database, REF+"/users/"+"hub/"), hubID);
+function errorCallback(error){
+    alert(error);
 }
 
+function createNewUser(email, password, callback){
+    createUserWithEmailAndPassword(getAuth(), email, password).then(callback).catch(errorCallback);
+}
+
+function signInUser(email, password, callback){
+    signInWithEmailAndPassword(getAuth(), email, password).then(callback).catch(errorCallback);
+}
+
+function signOutUser(callback) {
+    signOut(getAuth()).then(callback).catch(errorCallback);
+}
+
+export { createNewUser, signInUser, signOutUser };
+/*
 function writeUserData(userId, name, email) {
     const db = getDatabase();
     set(ref(db, 'users/' + userId), {
@@ -49,4 +43,4 @@ function writeUserData(userId, name, email) {
     });
   }
 
-export {createAccount, writeUserData};
+export {createAccount, writeUserData}; */

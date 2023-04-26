@@ -1,5 +1,6 @@
 <script>
 import LoginView from '../views/LoginView.vue'
+import { createNewUser, signInUser, signOutUser } from '../firebaseModel';
 export default {
     data(){
         return {
@@ -13,6 +14,8 @@ export default {
     },
     methods: {
         storeData(mail, pw){
+            createNewUser(mail, pw);
+            //change this from firebase?
             this.email = mail;
             this.password = pw;
             this.model.isSignedIn = true;
@@ -20,8 +23,14 @@ export default {
         },
         logout(){
             if(confirm("Are you sure you want to log out?")){
+                signOutUser;
                 this.model.isSignedIn = false;
             }
+        },
+        login(mail, pw){
+            signInUser(mail,pw);
+            this.model.isSignedIn = true;
+            
         }
     },
     props: {
@@ -32,6 +41,10 @@ export default {
 
 <template>
     <div>
-        <LoginView @info-submit="storeData" @user-logout="logout" :isSignedIn=this.model.isSignedIn />
+        <LoginView @signup-info="storeData" 
+        @user-logout="logout" 
+        @user-login="login" 
+        :isSignedIn=this.model.isSignedIn
+        :getMailAddress=this.model.emailAddress />
     </div>
 </template>

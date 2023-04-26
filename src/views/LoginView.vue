@@ -8,11 +8,14 @@
             passwordChange(e){
                 this.password = e.target.value;
             },
-            submit(){
-                this.$emit('info-submit', this.email, this.password);
+            login(){
+                this.$emit('user-login', this.email, this.password);
             },
             logout(){
                 this.$emit('user-logout');
+            },
+            signup(){
+                this.$emit('signup-info', this.email, this.password);
             }
         },
         data(){
@@ -21,25 +24,36 @@
                 password: "",
             }
         },
-        emits:['info-submit', 'user-logout'],
+        emits:['signup-info', 'user-logout', 'user-login'],
         props:{
             isSignedIn: Boolean,
-        }
+            getMailAddress: String
+        },
+        computed: {
+            email() {
+                return this.email;
+            }
+  },
     }
 </script>
 
 <template>
-    <h4>Please enter your e-mail and password</h4>
-    <div>
+    <h4 v-if="!this.isSignedIn">Please enter your e-mail and password</h4>
+    <h4 v-else>Welcome {{ this.getMailAddress }}</h4>
+
+    <div v-if="!this.isSignedIn">
         <input @change="mailChange" placeholder="E-mail" />
     </div>
-    <div>
+    <div v-if="!this.isSignedIn">
         <input type="password" @change="passwordChange" placeholder="Password" />
     </div>
-    <div>
-        <button @click="submit" class="buttons2">Submit</button>
+    <div v-if="!this.isSignedIn">
+        <button @click="login" class="buttons2">Log in</button>
     </div>
-    <div v-if="this.isSignedIn">
+    <div v-else>
       <button @click="logout" class="buttons2">Log out</button>
+    </div>
+    <div v-if="!this.isSignedIn">
+      <button @click="signup" class="buttons2">Sign up</button>
     </div>
 </template>
