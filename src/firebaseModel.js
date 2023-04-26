@@ -1,40 +1,52 @@
+/*
+    * firebaseModel.js is responsible for storing the state of the page and notifying the view when the state changes.
+    * It is also responsible for communicating with the database.
+*/
 
-import firebaseConfig from "/src/firebaseConfig.js";
+import firebaseConfig from "./firebaseConfig";
+import energyModel from "/energyModel.js";
+
+// Instructions from Firebase.
+import {initializeApp} from "firebase/app";
+import {getDatabase, ref, set, get, onChildRemoved, onChildAdded, onValue} from "firebase/database";
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const auth = getAuth(app);
 
 const REF="EnergyGuard";
 
-firebase.initializeApp(firebaseConfig);  
-firebase.database().ref(REF+"/test").set("dummy");
+const hubID=1;
 
-function observerRecap(model) {
-    
-    function payloadACB(payload){
-        if(payload){
-            /*
-            if(payload.numberOfGuests){
-                firebase.database().ref(REF+"/numberOfGuests").set(payload.numberOfGuests);
-            }
-            */
+function createAccount (email, password) {
+    /*
+    createUserWithEmailAndPassword(auth, email, password)
+    .then(function handleSignUp (userCredential) {
+            // Signed in
+            const user = userCredential.user;
+            //model.setUser(user.email);
+            set(ref(database, REF + "/users/"+ user.uid + "/hub/"), hubID);
+            //model.setAuthErrorMessage(null);
         }
-        console.log(payload);
-    }
-    //model.addObserver(payloadACB);
+    )
+    .catch(function handleError (error) {
+            const errorCode = error.code;
+            console.log(errorCode);
+            //model.setAuthErrorMessage(errorCode);
+        }
+        
+    );
+    */
+    set(ref(database, REF+"/users/"+"hub/"), hubID);
 }
 
-function firebaseModelPromise() {
-    function makeBigPromiseACB(firebaseData) {
-        return;
-    }
-    //return firebase.database().ref(REF).once("value").then(makeBigPromiseACB);
-}
+function writeUserData(userId, name, email) {
+    const db = getDatabase();
+    set(ref(db, 'users/' + userId), {
+      username: name,
+      email: email
+    });
+  }
 
-function updateFirebaseFromModel(model) {
-    //observerRecap(model);
-    return;
-}
-
-function updateModelFromFirebase(model) {
-    return;
-}
-
-export {observerRecap, firebaseModelPromise, updateFirebaseFromModel, updateModelFromFirebase};
+export {createAccount, writeUserData};

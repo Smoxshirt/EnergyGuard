@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import PlaceHolderView from '../views/PlaceHolderView.vue'
+import LoginPresenter from '../presenters/LoginPresenter.vue'
+import DetailsPresenter from '../presenters/DetailsPresenter.vue'
 import DeviceView from '../views/DeviceView.vue'
 
 const router = createRouter({
@@ -23,11 +25,33 @@ const router = createRouter({
       component: PlaceHolderView
     },
     {
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+      path: '/login',
+      name: 'Login',
+      component: LoginPresenter
+    },
+    {
+>>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
       path: '/devices',
       name: 'Devices',
       component: DeviceView
+    },
+    {
+      path: '/details',
+      name: 'Details',
+      component: DetailsPresenter
     }
   ]
 })
+=======
+      path: '/login',
+      name: 'Login',
+      component: LoginPresenter
+    },
+  ],
+});
+>>>>>>> Stashed changes
 
-export default router
+export default router;

@@ -1,0 +1,30 @@
+<script>
+    import {RouterLink} from 'vue-router';
+    import './main.css';
+
+    export default {
+        components: {
+            RouterLink,
+        },
+    };
+</script>
+
+<template>
+    <header class="top-header">
+        <div class="dropdown">
+            <div class="dropdown-button">
+                <div class="dropdown-icon"></div>
+                <div class="dropdown-icon"></div>
+                <div class="dropdown-icon"></div>
+            </div>
+             <div class="dropdown-content">
+                <h4>
+                    <RouterLink to="/" class="dropdown-buttons-top">Home</RouterLink> 
+                    <RouterLink to="/overview" class="dropdown-buttons">Overview</RouterLink>
+                    <RouterLink to="/placeholder" class="dropdown-buttons">Buttons</RouterLink>
+                </h4>
+            </div>
+        </div>
+        <RouterLink to="/login" class="login-button">Login</RouterLink>
+    </header>
+</template>
