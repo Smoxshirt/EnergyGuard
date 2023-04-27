@@ -1,5 +1,6 @@
 <script>
 import LoginView from '../views/LoginView.vue'
+import { createNewUser, signInUser } from '../firebaseModel.js'
 export default {
     data(){
         return {
@@ -17,11 +18,15 @@ export default {
             this.password = pw;
             this.model.isSignedIn = true;
             this.model.setEmail(mail);
+            createNewUser(mail, pw, this.signupCallback.bind(this));
         },
         logout(){
             if(confirm("Are you sure you want to log out?")){
                 this.model.isSignedIn = false;
             }
+        },
+        signupCallback(){
+            confirm("Signed up!");
         }
     },
     props: {
