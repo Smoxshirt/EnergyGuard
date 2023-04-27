@@ -59,7 +59,28 @@ function updateModelFromFirebase(){
     }
 }
 
-export { createNewUser, signInUser, signOutUser };
+function writeUserData(path, data) {
+    if(auth.currentUser){
+        const db = getDatabase();
+        set(ref(db, 'users/' + auth.currentUser.uid + "/" + path), {
+            value: data
+        });
+    }else{
+        alert("You need to be logged in to add data.");
+    }
+  }
+
+  function readUserData(path, callback){
+    if(auth.currentUser){
+        const db = getDatabase();
+        const fullPath = ref(db, 'users/' + auth.currentUser.uid + "/" + path);
+        onValue(fullPath, callback);
+    }else{
+        alert("You need to be logged in to read data.")
+    }
+  }
+
+export { createNewUser, signInUser, signOutUser, writeUserData, readUserData };
 /*
 function writeUserData(userId, name, email) {
     const db = getDatabase();
