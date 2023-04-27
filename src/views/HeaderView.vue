@@ -22,6 +22,8 @@
                     <RouterLink to="/" class="dropdown-buttons-top">Home</RouterLink> 
                     <RouterLink to="/overview" class="dropdown-buttons">Overview</RouterLink>
                     <RouterLink to="/placeholder" class="dropdown-buttons">Buttons</RouterLink>
+                    <RouterLink to="/details" class="dropdown-buttons">Details</RouterLink>
+
                 </h4>
             </div>
         </div>

@@ -17,23 +17,27 @@ export default {
             //change this from firebase?
             this.email = mail;
             this.password = pw;
-            this.model.isSignedIn = true;
-            this.model.setEmail(mail);
             createNewUser(mail, pw, this.signupCallback.bind(this));
         },
         logout(){
             if(confirm("Are you sure you want to log out?")){
-                signOutUser;
-                this.model.isSignedIn = false;
+                signOutUser(this.signOutCallback.bind(this));
             }
         },
         login(mail, pw){
-            signInUser(mail,pw, this.signupCallback.bind(this));
-            this.model.isSignedIn = true;
-            
+            signInUser(mail,pw, this.signInCallback.bind(this));
         },
         signupCallback(){
-            confirm("Signed up!");
+            alert("Signed up!");
+        },
+        signInCallback(credentials){
+            alert("Signed in!");
+            this.model.isSignedIn = true;
+            this.model.setEmail(credentials.user.email);
+            console.log(credentials.user.email);
+        },
+        signOutCallback(){
+            this.model.isSignedIn = false;
         }
     },
     props: {
