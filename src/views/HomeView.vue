@@ -34,7 +34,7 @@ import './main.css';
 
     <div class="home-view">
       <ChartView />
-      <DeviceView />
+      <DeviceView :model="this.model"/>
     </div>
   </main>
 

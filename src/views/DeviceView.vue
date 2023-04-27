@@ -3,11 +3,17 @@ import './DeviceView.css';
 export default {
   methods: {
     toggleActive(device) {
-      device.isActive = !device.isActive;
+      device.isTurnedOn = !device.isTurnedOn;
     },
     toggleExpand(device) {
         device.expanded = !device.expanded;
     }
+  },
+  props: {
+    model: {}
+  },
+  created(){
+    console.log(this.model)
   },
   data() {
     return {
@@ -55,13 +61,13 @@ export default {
 
 <template>
     <div class="devices-container">
-        <div class="device" v-for="device in devices" :key="device.id" :class="{expanded: device.expanded}">
+        <div class="device" v-for="device in this.model.devices" :key="device.id" :class="{expanded: device.expanded}">
             <div class="device-top">
                 <div class="device-content">
                     <h3>{{ device.name }}</h3>
                     <p>Status: {{ device.status }}</p>
                     </div>
-                    <button class="on-off-button" :class="[device.isActive ? 'green' : 'red']" @click="toggleActive(device)">{{ device.isActive ? 'ON' : 'OFF' }}</button>
+                    <button class="on-off-button" :class="[device.isTurnedOn ? 'green' : 'red']" @click="toggleActive(device)">{{ device.isTurnedOn ? 'ON' : 'OFF' }}</button>
                     <button class="expand-button" @click="toggleExpand(device)">
                         <span class="arrow-down" v-if="!device.expanded"></span>
                         <span class="arrow-up" v-else></span>
