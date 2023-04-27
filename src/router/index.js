@@ -30,9 +30,9 @@ const router = createRouter({
       component: LoginPresenter
     },
     {
-      path: '/devices',
-      name: 'Devices',
-      component: DeviceView
+      path: '/login',
+      name: 'Login',
+      component: LoginPresenter
     },
     {
       path: '/details',
@@ -42,4 +42,4 @@ const router = createRouter({
   ]
 })
 
-export default router
+export default router;
