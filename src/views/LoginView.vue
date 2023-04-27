@@ -29,13 +29,9 @@
 </script>
 
 <template>
-    <h4>Please enter your e-mail and password</h4>
+    <h4 class="white-text">Please enter your e-mail and password</h4>
     <div>
-<<<<<<< HEAD
         <input type="text" @change="mailChange" placeholder="E-mail" />
-=======
-        <input @change="mailChange" placeholder="E-mail" />
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
     </div>
     <div>
         <input type="password" @change="passwordChange" placeholder="Password" />

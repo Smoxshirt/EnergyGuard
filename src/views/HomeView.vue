@@ -1,62 +1,42 @@
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-<script setup>
-
-=======
 <script>
-import DeviceView from './DeviceView.vue'
+import DeviceView from './DeviceView.vue';
+import ChartView from './ChartView.vue';
+import './main.css';
 
   export default {
     data(){
       return{
-
-=======
-<script>
-  export default {
-    data(){
-      return{
-
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
       }
     },
     props:{
       model: {},
-<<<<<<< HEAD
+
     },
     components: {
+      ChartView,
       DeviceView,
-    }
-  }
->>>>>>> Stashed changes
-=======
-    }
-  }
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
+    },
+  };
+
 </script>
 
 <template>
   <main>
     <div>
-      Welcome!
+     <p class="white-text">Welcome!</p>
     </div>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
+
     <div v-if="this.model.isSignedIn">
-      You are logged in as {{ this.model.emailAddress }}.
+      <p class="white-text">You are logged in as {{ this.model.emailAddress }}.</p>
     </div>
     <div v-if="!this.model.isSignedIn">
-      You are not logged in.
+      <p class="white-text">You are not logged in.</p>
     </div>
-<<<<<<< HEAD
-    <div>
+
+    <div class="home-view">
+      <ChartView />
       <DeviceView />
     </div>
->>>>>>> Stashed changes
-=======
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
   </main>
 
   

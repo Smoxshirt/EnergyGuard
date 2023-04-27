@@ -25,18 +25,9 @@ const router = createRouter({
       component: PlaceHolderView
     },
     {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
       path: '/login',
       name: 'Login',
       component: LoginPresenter
-    },
-    {
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
-      path: '/devices',
-      name: 'Devices',
-      component: DeviceView
     },
     {
       path: '/details',
@@ -45,13 +36,5 @@ const router = createRouter({
     }
   ]
 })
-=======
-      path: '/login',
-      name: 'Login',
-      component: LoginPresenter
-    },
-  ],
-});
->>>>>>> Stashed changes
 
 export default router;

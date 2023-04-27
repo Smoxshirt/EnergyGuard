@@ -1,6 +1,5 @@
 body {
-    background-color: #969191;
-<<<<<<< HEAD
+    background-color: #464646;
     margin: 0;
     padding: 0;
 }
@@ -8,8 +7,18 @@ body {
 html {
     margin: 0;
     padding: 0;
-=======
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
+}
+
+.white-text {
+    color: white;
+}
+
+.dark-green {
+    color: #2C9D3F;
+}
+
+.light-green {
+    color: #00FF00;
 }
 
 .buttons {
@@ -24,11 +33,20 @@ html {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
-<<<<<<< HEAD
-.dropdown-buttons {
+.generic-button {
     color: black;
     text-decoration: none;
     background-color: #ccc;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.dropdown-buttons {
+    color: white;
+    text-decoration: none;
+    background-color: #2C9D3F;
     cursor: pointer;
     width: 100%;
     height: 40px;
@@ -38,9 +56,9 @@ html {
 }
 
 .dropdown-buttons-top {
-    color: black;
+    color: white;
     text-decoration: none;
-    background-color: #ccc;
+    background-color: #2C9D3F;
     cursor: pointer;
     width: 100%;
     height: 40px;
@@ -62,8 +80,6 @@ html {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
-=======
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
 .buttons2 {
     cursor: pointer;
     height: 30px;
@@ -73,13 +89,12 @@ html {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
-<<<<<<< HEAD
 .login-button {
     position:absolute;
     right: 0px;
-    color: black;
+    color: white;
     text-decoration: none;
-    background-color: #ccc;
+    background-color: #2C9D3F;
     cursor: pointer;
     height: 100%;
     width: 100px;
@@ -88,22 +103,14 @@ html {
     align-items: center;
 }
 
-=======
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
 .dropdown-button {
-    color: black;
+    color: white;
     text-decoration: none;
-    background-color: #ccc;
+    background-color: #2C9D3F;
     cursor: pointer;
     height: 50px;
     width: 60px;
-<<<<<<< HEAD
     padding: 15px 0 0 30px;
-=======
-    border-radius: 6px;
-    padding: 10px;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
 }
 
 .dropdown {
@@ -112,20 +119,15 @@ html {
 }
 
 .dropdown-icon {
-<<<<<<< HEAD
     width: 25px;
-=======
-    width: 30px;
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
     height: 3px;
-    background-color: black;
+    background-color: white;
     margin: 6px 0;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-<<<<<<< HEAD
     background-color:#ccc;
     min-width: 160px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -164,23 +166,30 @@ input[type=password], select {
 }
 
 .top-header {
-    background-color: #312f2f;
+    background-color: #1a1a1a;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     z-index: 100;
     margin-bottom: 20px;
-=======
-    height: 500px;
-    background-color:#ccc;
-    min-width: 160px;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-    padding: 12px 16px;
-    z-index: 1;
 }
 
-.dropdown:hover .dropdown-content {
-    display: block; 
->>>>>>> eec88ab185bdddc9f342562797ca1c8d374d7e5a
+.chart-view {
+    width: 60%;
+    height: 800px;
+    border: 1px solid #ccc;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.home-view {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 72px);
+    gap: 10px;
+    margin: 0 0 50px 70px;
 }
