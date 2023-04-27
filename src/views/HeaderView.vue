@@ -23,10 +23,14 @@
                     <RouterLink to="/overview" class="dropdown-buttons">Overview</RouterLink>
                     <RouterLink to="/placeholder" class="dropdown-buttons">Buttons</RouterLink>
                     <RouterLink to="/details" class="dropdown-buttons">Details</RouterLink>
-
                 </h4>
             </div>
         </div>
+        <div class="logo-header">
+            <h1 class="header-energyguard">EnergyGuard</h1>
+            <img class="logo" src="./energyguard.png" alt="">
+        </div>
         <RouterLink to="/login" class="login-button">Login</RouterLink>
+        <div></div>
     </header>
 </template>

@@ -9,6 +9,12 @@ html {
     padding: 0;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+    font-family: Arial;
+}
+
+
+
 .white-text {
     color: white;
 }
@@ -19,6 +25,12 @@ html {
 
 .light-green {
     color: #00FF00;
+}
+
+.header-energyguard {
+    color: white;
+    font-size: 50px;
+    margin: 0;
 }
 
 .buttons {
@@ -108,7 +120,7 @@ html {
     text-decoration: none;
     background-color: #2C9D3F;
     cursor: pointer;
-    height: 50px;
+    height: 65px;
     width: 60px;
     padding: 15px 0 0 30px;
 }
@@ -173,6 +185,7 @@ input[type=password], select {
     position: relative;
     z-index: 100;
     margin-bottom: 20px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 3px 10px 0px, rgba(14, 30, 37, 0.32) 0px 15px 20px 0px;
 }
 
 .chart-view {
@@ -193,4 +206,18 @@ input[type=password], select {
     height: calc(100vh - 72px);
     gap: 10px;
     margin: 0 0 50px 70px;
+}
+
+.logo {
+    height: 80px;
+    margin: 0;
+}
+
+.logo-header {
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 100;
 }
