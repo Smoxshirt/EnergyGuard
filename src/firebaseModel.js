@@ -33,10 +33,10 @@ function signOutUser(callback) {
     signOut(getAuth()).then(callback).catch(errorCallback);
 }
 
-function payloadACB(model){ //with observer change, changes info on firebase
+function payloadACB(payload){ //with observer change, changes info on firebase
     //add date? add device? 
 
-
+    
     //user specific
     if (auth.currentUser) {
 

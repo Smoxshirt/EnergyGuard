@@ -1,4 +1,23 @@
 <script>
+import DeviceView from './DeviceView.vue';
+import ChartView from './ChartView.vue';
+import './main.css';
+
+  export default {
+    data(){
+      return{
+      }
+    },
+    props:{
+      model: {},
+
+    },
+    components: {
+      ChartView,
+      DeviceView,
+    },
+  };
+<script>
   export default {
     data(){
       return{
@@ -15,12 +34,6 @@
   <main>
     <div>
       Welcome!
-    </div>
-    <div v-if="this.model.isSignedIn">
-      You are logged in as {{ this.model.emailAddress }}.
-    </div>
-    <div v-if="!this.model.isSignedIn">
-      You are not logged in.
     </div>
   </main>
 
