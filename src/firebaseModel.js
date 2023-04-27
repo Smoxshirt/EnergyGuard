@@ -33,6 +33,32 @@ function signOutUser(callback) {
     signOut(getAuth()).then(callback).catch(errorCallback);
 }
 
+function payloadACB(model){ //with observer change, changes info on firebase
+    //add date? add device? 
+
+
+    //user specific
+    if (auth.currentUser) {
+
+    }
+}
+
+function firebaseModelPromise(){ //make promises
+
+}
+
+function updateFirebaseFromModel(){
+
+}
+
+function updateModelFromFirebase(){
+
+    //user specific
+    if (auth.currentUser) {
+
+    }
+}
+
 export { createNewUser, signInUser, signOutUser };
 /*
 function writeUserData(userId, name, email) {
