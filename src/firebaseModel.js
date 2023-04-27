@@ -14,9 +14,6 @@ import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sig
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const auth = getAuth(app);
 
 const REF="EnergyGuard";
 

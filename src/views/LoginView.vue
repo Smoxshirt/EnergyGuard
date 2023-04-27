@@ -42,7 +42,7 @@
     <h4 v-else>Welcome {{ this.getMailAddress }}</h4>
 
     <div v-if="!this.isSignedIn">
-        <input @change="mailChange" placeholder="E-mail" />
+        <input type="text" @change="mailChange" placeholder="E-mail" />
     </div>
     <div v-if="!this.isSignedIn">
         <input type="password" @change="passwordChange" placeholder="Password" />

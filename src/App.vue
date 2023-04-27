@@ -21,16 +21,8 @@ export default {
 </script>
 
 <template>
-    <div>
-      <nav>
-        <RouterLink to="/">Home </RouterLink>
-        <RouterLink to="/overview">Overview </RouterLink>
-        <RouterLink to="/placeholder">Placeholder </RouterLink>
-        <RouterLink to="/devices">Devices</RouterLink>
-      </nav>
-    </div>
-
-  <RouterView />
+  <HeaderView />
+  <RouterView :model="this.model" />
 </template>
 
 <style scoped>

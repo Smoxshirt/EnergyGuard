@@ -17,23 +17,24 @@ import './main.css';
       DeviceView,
     },
   };
-<script>
-  export default {
-    data(){
-      return{
-
-      }
-    },
-    props:{
-      model: {},
-    }
-  }
 </script>
 
 <template>
   <main>
     <div>
-      Welcome!
+     <p class="white-text">Welcome!</p>
+    </div>
+
+    <div v-if="this.model.isSignedIn">
+      <p class="white-text">You are logged in as {{ this.model.emailAddress }}.</p>
+    </div>
+    <div v-if="!this.model.isSignedIn">
+      <p class="white-text">You are not logged in.</p>
+    </div>
+
+    <div class="home-view">
+      <ChartView />
+      <DeviceView />
     </div>
   </main>
 
