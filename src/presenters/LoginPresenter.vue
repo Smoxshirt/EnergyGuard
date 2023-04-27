@@ -14,12 +14,12 @@ export default {
     },
     methods: {
         storeData(mail, pw){
-            createNewUser(mail, pw);
             //change this from firebase?
             this.email = mail;
             this.password = pw;
             this.model.isSignedIn = true;
             this.model.setEmail(mail);
+            createNewUser(mail, pw, this.signupCallback.bind(this));
         },
         logout(){
             if(confirm("Are you sure you want to log out?")){
@@ -28,9 +28,12 @@ export default {
             }
         },
         login(mail, pw){
-            signInUser(mail,pw);
+            signInUser(mail,pw, this.signupCallback.bind(this));
             this.model.isSignedIn = true;
             
+        },
+        signupCallback(){
+            confirm("Signed up!");
         }
     },
     props: {
