@@ -33,6 +33,7 @@ function signOutUser(callback) {
     signOut(getAuth()).then(callback).catch(errorCallback);
 }
 
+/*
 function payloadACB(payload){ //with observer change, changes info on firebase
     //add date? add device? 
 
@@ -42,6 +43,7 @@ function payloadACB(payload){ //with observer change, changes info on firebase
 
     }
 }
+*/
 
 function firebaseModelPromise(){ //make promises
 
@@ -49,14 +51,61 @@ function firebaseModelPromise(){ //make promises
 
 function updateFirebaseFromModel(){
 
+    function payloadACB(payload){
+        //user specific
+        if (auth.currentUser) {
+            if(payload.deviceToAdd){
+                set(ref(db, 'users/' + auth.currentUser.uid + "/devices" + payload.deviceToAdd.id), payload.deviceToAdd.name), {
+            }
+
+            if(payload.deviceToRemove){
+                set(ref(db, 'users/' + auth.currentUser.uid + "/devices" + payload.deviceToRemove.id), null), {
+            }
+
+            if(payload.turnOnDevice){//unnecessary?
+                set(ref(db, 'users/' + auth.currentUser.uid + "/devices/" + payload.turnOnDevice.id), payload.deviceToAdd.name), {
+            }
+        }
+    }
+
+    model.addObserver(payloadACB)
+
 }
 
-function updateModelFromFirebase(){
+function updateModelFromFirebase(model){
+    if(auth.currentUser){
 
-    //user specific
-    if (auth.currentUser) {
+        onValue(ref(db, 'users/' + auth.currentUser.uid + "/devices/" ), 
+            function dataChangedInFB(data){
+                model.updateValueInModel(data.val());
+            }
+        )
+
+        onChildAdded(ref(db, 'users/' + auth.currentUser.uid + "/devices/" ),
+            function deviceAdded(data){
+                function deviceAlreadyAddedCB(device){
+                    return device.id== data.key;
+                }
+                if(!model.devices.find(deviceAlreadyAddedCB)) {
+                    function addDeviceACB(device){
+                        model.addDevice(device);
+                    }
+                    //fetch device id then add device to model (addDeviceACB)
+                }
+            }
+        
+        )
+
+        onChildRemoved(ref(db, 'users/' + auth.currentUser.uid + "/devices/" ),
+            function deviceRemoved(data){
+                //remove device in model where id is data.key(which is from firebase)
+            }
+        )
+
 
     }
+
+    
 }
 
 function writeUserData(path, data) {
