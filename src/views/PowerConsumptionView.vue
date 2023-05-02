@@ -1,5 +1,6 @@
 <script setup>
 import PowerConsumption from '../components/PowerConsumption.vue'
+import './main.css';
 </script>
 
 

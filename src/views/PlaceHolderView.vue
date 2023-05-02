@@ -1,5 +1,6 @@
 <script>
   import { writeUserData, readUserData } from "../firebaseModel.js"
+  import './main.css';
   export default {
     props: {
       model: {
@@ -48,16 +49,19 @@
       {{ device.id }}:
       <span v-for="update in device.consumption">{{ update[0] }} &nbsp;</span>
     </div> -->
-    <div>
-      <input type="text" @change="inputChange" placeholder="Input to database" />
+    <div class="general-container">
+      <div>
+        <input type="text" @change="inputChange" placeholder="Input to database" />
+      </div>
+      <div>
+        <button @click="testFunction">Write</button>
+      </div>
+      <div>
+        <button @click="readFunction">Read</button>
+      </div>
+      <div>
+        Data from database:&nbsp;{{ this.readData }}
+      </div>
     </div>
-    <div>
-      <button @click="testFunction">Write</button>
-    </div>
-    <div>
-      <button @click="readFunction">Read</button>
-    </div>
-    <div>
-      Data from database:&nbsp;{{ this.readData }}
-    </div>
+
 </template>

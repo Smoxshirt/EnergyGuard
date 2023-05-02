@@ -1,5 +1,7 @@
 <script>
 import './DeviceView.css';
+import './main.css';
+import './mobile.css';
 export default {
   methods: {
     toggleActive(device) {

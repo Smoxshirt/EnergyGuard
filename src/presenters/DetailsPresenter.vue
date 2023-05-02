@@ -38,18 +38,20 @@
 </script>
 
 <template>
-    <h4>Please enter start and end date for the period</h4>
-    <div>
-        <input @change="updateStartTime" placeholder="Start" />
-    </div>
-    <div>
-        <input @change="updateEndTime" placeholder="End" />
-    </div>
-    <div>
-        <button @click="setPeriod">Set period</button>
-    </div>
-    <h4>Consumption overview between {{ this.model.startTime }} and {{ this.model.endTime }}</h4>
-    <div v-for="device in this.model.devices">
-        Total energy consumption for {{ device.name }}:&nbsp;{{ device.periodTotal }}
-    </div>
+    <div class="general-container">
+        <h4>Please enter start and end date for the period</h4>
+        <div>
+            <input @change="updateStartTime" placeholder="Start" />
+        </div>
+        <div>
+            <input @change="updateEndTime" placeholder="End" />
+        </div>
+        <div>
+            <button @click="setPeriod">Set period</button>
+        </div>
+        <h4>Consumption overview between {{ this.model.startTime }} and {{ this.model.endTime }}</h4>
+        <div v-for="device in this.model.devices">
+            Total energy consumption for {{ device.name }}:&nbsp;{{ device.periodTotal }}
+        </div>
+</div>
 </template>
