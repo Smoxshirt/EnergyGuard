@@ -65,12 +65,16 @@ function updateFirebaseFromModel(){
             if(payload.turnOnDevice){//unnecessary?
                 set(ref(db, 'users/' + auth.currentUser.uid + "/devices/" + payload.turnOnDevice.id), payload.deviceToAdd.name), {
             }
+
+
         }
     }
 
     model.addObserver(payloadACB)
 
 }
+        }
+    }}
 
 function updateModelFromFirebase(model){
     if(auth.currentUser){
@@ -84,7 +88,7 @@ function updateModelFromFirebase(model){
         onChildAdded(ref(db, 'users/' + auth.currentUser.uid + "/devices/" ),
             function deviceAdded(data){
                 function deviceAlreadyAddedCB(device){
-                    return device.id== data.key;
+                    return device.id === data.key;
                 }
                 if(!model.devices.find(deviceAlreadyAddedCB)) {
                     function addDeviceACB(device){
@@ -114,7 +118,7 @@ function writeUserData(path, data) {
         set(ref(db, 'users/' + auth.currentUser.uid + "/" + path), {
             value: data
         });
-    }else{
+    } else{
         alert("You need to be logged in to add data.");
     }
   }
@@ -124,19 +128,10 @@ function writeUserData(path, data) {
         const db = getDatabase();
         const fullPath = ref(db, 'users/' + auth.currentUser.uid + "/" + path);
         onValue(fullPath, callback);
-    }else{
+    } else{
         alert("You need to be logged in to read data.")
     }
   }
 
-export { createNewUser, signInUser, signOutUser, writeUserData, readUserData };
-/*
-function writeUserData(userId, name, email) {
-    const db = getDatabase();
-    set(ref(db, 'users/' + userId), {
-      username: name,
-      email: email
-    });
-  }
 
-export {createAccount, writeUserData}; */
+export { createNewUser, signInUser, signOutUser, writeUserData, readUserData };
