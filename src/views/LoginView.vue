@@ -38,22 +38,24 @@
 </script>
 
 <template>
-    <h4 v-if="!this.isSignedIn">Please enter your e-mail and password</h4>
-    <h4 v-else>Welcome {{ this.getMailAddress }}</h4>
+    <div class="general-container">
+        <h4 v-if="!this.isSignedIn">Please enter your e-mail and password</h4>
+        <h4 v-else>Welcome {{ this.getMailAddress }}</h4>
 
-    <div v-if="!this.isSignedIn">
-        <input type="text" @change="mailChange" placeholder="E-mail" />
-    </div>
-    <div v-if="!this.isSignedIn">
-        <input type="password" @change="passwordChange" placeholder="Password" />
-    </div>
-    <div v-if="!this.isSignedIn">
-        <button @click="login" class="buttons2">Log in</button>
-    </div>
-    <div v-else>
-      <button @click="logout" class="buttons2">Log out</button>
-    </div>
-    <div v-if="!this.isSignedIn">
-      <button @click="signup" class="buttons2">Sign up</button>
+        <div v-if="!this.isSignedIn">
+            <input type="text" @change="mailChange" placeholder="E-mail" />
+        </div>
+        <div v-if="!this.isSignedIn">
+            <input type="password" @change="passwordChange" placeholder="Password" />
+        </div>
+        <div v-if="!this.isSignedIn">
+            <button @click="login" class="buttons2">Log in</button>
+        </div>
+        <div v-else>
+        <button @click="logout" class="buttons2">Log out</button>
+        </div>
+        <div v-if="!this.isSignedIn">
+        <button @click="signup" class="buttons2">Sign up</button>
+        </div>
     </div>
 </template>
