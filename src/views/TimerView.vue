@@ -10,6 +10,9 @@ export default {
     data() {
         return {
             currentDateTime: this.getCurrentDateTime(),
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
         };
     },
     methods: {
@@ -30,7 +33,9 @@ export default {
             return nowTwo;
         },
         setScheduledTimer() {
-            console.log(new Date().getTime());
+            const selectedDateTime = new Date(this.currentDateTime);
+            const timestamp = selectedDateTime.getTime();
+            console.log(timestamp);
         },
         setTimer() {
             console.log(new Date().getTime());
