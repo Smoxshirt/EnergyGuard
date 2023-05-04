@@ -37,16 +37,16 @@ import './mobile.css';
 
 <template>
   <main>
-    <div class="general-container">
+    <div class="welcome-container">
       <div>
-     <p>Welcome!</p>
+     <p class="p-welcome">Welcome!</p>
     </div>
 
     <div v-if="this.model.isSignedIn">
-      <p>You are logged in as {{ this.model.emailAddress }}.</p>
+      <p class="p-welcome">You are logged in as {{ this.model.emailAddress }}.</p>
     </div>
     <div v-if="!this.model.isSignedIn">
-      <p>You are not logged in.</p>
+      <p class="p-welcome">You are not logged in.</p>
     </div>
     </div>
 

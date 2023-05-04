@@ -56,7 +56,7 @@
         padding: 20px;
     }
 
-    .general-container {
+    .general-container, .welcome-container {
         margin-bottom: 0;
     }
     canvas {
