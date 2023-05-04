@@ -1,5 +1,6 @@
 <script>
   import { writeUserData, readUserData } from "../firebaseModel.js"
+  import './main.css';
   export default {
     props: {
       model: {
@@ -95,6 +96,7 @@
       {{ device.id }}:
       <span v-for="update in device.consumption">{{ update[0] }} &nbsp;</span>
     </div> -->
+    
     <div>
       <input type="text" @change="inputChange" placeholder="Input to database" />
     </div>
@@ -107,36 +109,39 @@
     <div>
       Data from database:&nbsp;{{ this.readData }}
     </div>
-    <div>
-      Add data to custom path
-    </div>
-    <div>
-      <input type="text" @change="customChange" placeholder="Path" />
-    </div>
-    <div>
-      <button @click="readFunctionB">Read</button>
-    </div>
-    <div>
-      Set turnoff flag
-    </div>
-    <div>
-      <button @click="turnOff">Turn off</button>
-    </div>
-    <div>
-      <button @click="turnOn">Turn on</button>
+    <div class="general-container">
+      <div>
+        Add data to custom path
+      </div>
+      <div>
+        <input type="text" @change="customChange" placeholder="Path" />
+      </div>
+      <div>
+        <button @click="readFunctionB">Read</button>
+      </div>
+      <div>
+        Set turnoff flag
+      </div>
+      <div>
+        <button @click="turnOff">Turn off</button>
+      </div>
+      <div>
+        <button @click="turnOn">Turn on</button>
+      </div>
+      
+      <div>
+        Add large array
+      </div>
+      <div>
+        <button @click="addLargeArray">Array</button>
+      </div>
+      <div>
+        Update devices in model from firebase
+      </div>
+      <div>
+        <button @click="getDevices">Update</button>
+      </div>
     </div>
     
-    <div>
-      Add large array
-    </div>
-    <div>
-      <button @click="addLargeArray">Array</button>
-    </div>
-    <div>
-      Update devices in model from firebase
-    </div>
-    <div>
-      <button @click="getDevices">Update</button>
-    </div>
     
 </template>

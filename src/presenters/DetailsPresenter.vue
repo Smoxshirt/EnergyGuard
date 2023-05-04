@@ -92,6 +92,7 @@
 </script>
 
 <template>
+    <div class="general-container">
     <h4>Please enter start and end date for the period</h4>
     <div>
         <input @change="updateStartTime" placeholder="Start" />
@@ -123,5 +124,7 @@
     <BarChartView v-if="this.displayBar"
     :dataArray="this.totalConsumptionArray"
     :nameArray="this.nameArray" />
+
+</div>
 
 </template>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="general-container">
     This is an about page
   </div>
 </template>
