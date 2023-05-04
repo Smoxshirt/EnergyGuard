@@ -278,3 +278,13 @@ input[type=datetime-local], select {
 .choose-timer {
     width: 60px;
 }
+
+canvas {
+    border-color:black;
+    border-width: 10px;
+    padding:10px;
+    width:flex !important;
+    height:flex !important;
+    max-width: 1000px !important;
+    max-height: 600px !important;
+}

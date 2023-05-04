@@ -1,5 +1,7 @@
 <script>
     import Chart from 'chart.js';
+    import './main.css';
+    import './mobile.css';
     export default {
         data(){
             return {
@@ -73,7 +75,7 @@
 
 <template>
     <div>
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        <canvas id="myChart" class="canvas"></canvas>
     </div>
     Here be graphs (soon).
     <div>

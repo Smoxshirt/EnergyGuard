@@ -1,5 +1,7 @@
 <script>
     import Chart from 'chart.js';
+    import './main.css';
+    import './mobile.css';
     export default {
         data(){
             return {
@@ -54,16 +56,3 @@
         <canvas class="canvas" id="barChart" aria-label="Test3"></canvas>
     </div>
 </template>
-
-<style scoped>
-    .canvas {
-        background-color: lightgrey;
-        border-color:black;
-        border-width: 10px;
-        padding:10px;
-        width:flex;
-        height:flex;
-        max-width:1000px;
-        max-height:1000px;
-    }
-</style>
