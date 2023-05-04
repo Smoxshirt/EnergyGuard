@@ -27,3 +27,7 @@ coverage
 *.sln
 
 **/*Config.js*
+
+firebase.json
+**/.*
+**/node_modules/**
