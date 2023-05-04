@@ -213,12 +213,12 @@ input[type=datetime-local], select {
 
 .chart-view {
     width: 60%;
-    height: 800px;
+    height: 80%;
     border: 1px solid #ccc;
     background-color: #ccc;
     display: flex;
-    justify-content: center;
     align-items: center;
+    flex-direction: column;
     border-radius: 10px;
     margin-right: 10px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -285,6 +285,10 @@ canvas {
     padding:10px;
     width:80% !important;
     height:auto !important;
-    max-width: 800px !important;
-    min-width: 800px !important;
+    max-width: 1000px !important;
+    min-width: 1000px !important;
+}
+
+.h1energy {
+    margin-bottom: 0;
 }

@@ -97,7 +97,8 @@
       <span v-for="update in device.consumption">{{ update[0] }} &nbsp;</span>
     </div> -->
     
-    <div>
+    <div class="general-container">
+      <div>
       <input type="text" @change="inputChange" placeholder="Input to database" />
     </div>
     <div>
@@ -109,7 +110,6 @@
     <div>
       Data from database:&nbsp;{{ this.readData }}
     </div>
-    <div class="general-container">
       <div>
         Add data to custom path
       </div>
