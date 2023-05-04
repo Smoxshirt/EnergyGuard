@@ -1,9 +1,8 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router';
-import HeaderView from './views/HeaderView.vue';
-</script>
+
 
 <script>
+import { RouterLink, RouterView } from 'vue-router';
+import HeaderView from './views/HeaderView.vue';
 import EnergyModel from './EnergyModel.js';
 import './views/main.css';
 
@@ -12,6 +11,11 @@ export default {
     return {
       model: {},
     };
+  },
+  components: {
+    HeaderView,
+    RouterView,
+    EnergyModel,
   },
 
   created() {
