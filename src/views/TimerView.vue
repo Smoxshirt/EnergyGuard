@@ -38,7 +38,16 @@ export default {
             console.log(timestamp);
         },
         setTimer() {
-            console.log(new Date().getTime());
+            console.log("current time " + new Date().getTime())
+            const currentTime = new Date();
+            const targetTime = new Date(
+                currentTime.getTime() + 
+                this.hours * 60 * 60 * 1000 + 
+                this.minutes * 60 * 1000 + 
+                this.seconds * 1000
+            );
+            const timestamp = targetTime.getTime();
+            console.log("current time + timer " + timestamp);
         },
     },
 };
@@ -53,6 +62,7 @@ export default {
         </div>
         <div class="timer-content">
             <h4>Set time until turning on/off</h4>
+            <p>hours, minutes, seconds</p>
             <input class="choose-timer" type="number" min="0" placeholder="Hours" v-model="hours" />
             <input class="choose-timer" type="number" min="0" placeholder="Minutes" v-model="minutes" />
             <input class="choose-timer" type="number" min="0" placeholder="Seconds" v-model="seconds" />
