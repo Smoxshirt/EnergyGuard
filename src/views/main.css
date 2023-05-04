@@ -283,8 +283,8 @@ canvas {
     border-color:black;
     border-width: 10px;
     padding:10px;
-    width:flex !important;
-    height:flex !important;
-    max-width: 1000px !important;
-    max-height: 600px !important;
+    width:80% !important;
+    height:auto !important;
+    max-width: 800px !important;
+    min-width: 800px !important;
 }
