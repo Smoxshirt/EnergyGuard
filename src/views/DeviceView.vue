@@ -3,10 +3,14 @@ import './DeviceView.css';
 import './main.css';
 import './mobile.css';
 import TimerView from './TimerView.vue';
+import { writeUserData, readUserData } from "../firebaseModel.js"
 export default {
   methods: {
     toggleActive(device) {
       device.isTurnedOn = !device.isTurnedOn;
+      var path = "devicelist/value/" + (device.id - 1) + "/isTurnedOn";
+      console.log(path);
+      writeUserData(path, device.isTurnedOn);
     },
     toggleExpand(device) {
         device.expanded = !device.expanded;
@@ -23,43 +27,7 @@ export default {
   },
   data() {
     return {
-        devices: [
-            {
-                id: 1, 
-                name: 'DeviceName 1', //user chooses name on web app, default to device "id"?
-                status: 'DeviceStatus', //unsure what to have here...
-                isActive: false, 
-                expanded: false 
-            },
-            {
-                id: 2, 
-                name: 'DeviceName 2', 
-                status: 'DeviceStatus', 
-                isActive: false, 
-                expanded: false 
-            },
-            {
-                id: 3, 
-                name: 'DeviceName 3', 
-                status: 'DeviceStatus', 
-                isActive: false, 
-                expanded: false 
-            },
-            {
-                id: 4, 
-                name: 'DeviceName 4', 
-                status: 'DeviceStatus', 
-                isActive: false, 
-                expanded: false 
-            },
-            {
-                id: 5, 
-                name: 'DeviceName 5', 
-                status: 'DeviceStatus', 
-                isActive: false, 
-                expanded: false 
-            }
-        ],
+
     };
   },
 };
