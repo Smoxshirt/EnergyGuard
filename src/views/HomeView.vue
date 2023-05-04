@@ -2,6 +2,7 @@
 import DeviceView from './DeviceView.vue';
 import ChartView from './ChartView.vue';
 import './main.css';
+import './mobile.css';
 
   export default {
     data(){
@@ -21,16 +22,19 @@ import './main.css';
 
 <template>
   <main>
-    <div>
-     <p class="white-text">Welcome!</p>
+    <div class="general-container">
+      <div>
+     <p>Welcome!</p>
     </div>
 
     <div v-if="this.model.isSignedIn">
-      <p class="white-text">You are logged in as {{ this.model.emailAddress }}.</p>
+      <p>You are logged in as {{ this.model.emailAddress }}.</p>
     </div>
     <div v-if="!this.model.isSignedIn">
-      <p class="white-text">You are not logged in.</p>
+      <p>You are not logged in.</p>
     </div>
+    </div>
+
 
     <div class="home-view">
       <ChartView />

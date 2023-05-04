@@ -6,6 +6,7 @@ import HeaderView from './views/HeaderView.vue';
 <script>
 import EnergyModel from './EnergyModel.js';
 import './views/main.css';
+import './views/mobile.css';
 
 export default {
   data() {

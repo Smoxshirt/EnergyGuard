@@ -1,6 +1,7 @@
 <script>
     import {RouterLink} from 'vue-router';
     import './main.css';
+    import './mobile.css';
 
     export default {
         components: {
@@ -11,12 +12,12 @@
 
 <template>
     <header class="top-header">
-        <div class="dropdown">
-            <div class="dropdown-button">
+            <div class="dropdown">
+            <button class="dropdown-button">
                 <div class="dropdown-icon"></div>
                 <div class="dropdown-icon"></div>
                 <div class="dropdown-icon"></div>
-            </div>
+            </button>
              <div class="dropdown-content">
                 <h4>
                     <RouterLink to="/" class="dropdown-buttons-top">Home</RouterLink> 

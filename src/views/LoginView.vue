@@ -1,5 +1,6 @@
 <script>
     import './main.css';
+    import './mobile.css';
     export default {
         methods: {
             mailChange(e){

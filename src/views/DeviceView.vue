@@ -2,6 +2,7 @@
 import './DeviceView.css';
 import './main.css';
 import './mobile.css';
+import TimerView from './TimerView.vue';
 export default {
   methods: {
     toggleActive(device) {
@@ -13,6 +14,9 @@ export default {
   },
   props: {
     model: {}
+  },
+  components: {
+    TimerView,
   },
   created(){
     console.log(this.model)
@@ -67,7 +71,7 @@ export default {
             <div class="device-top">
                 <div class="device-content">
                     <h3>{{ device.name }}</h3>
-                    <p>Status: {{ device.status }}</p>
+                    <p>Status: Timerstatus {{ device.status }}</p>
                     </div>
                     <button class="on-off-button" :class="[device.isTurnedOn ? 'green' : 'red']" @click="toggleActive(device)">{{ device.isTurnedOn ? 'ON' : 'OFF' }}</button>
                     <button class="expand-button" @click="toggleExpand(device)">
@@ -75,8 +79,8 @@ export default {
                         <span class="arrow-up" v-else></span>
                     </button>
                 </div>  
-            <div class="details" v-if="device.expanded">
-                <p>Some extra info about {{ device.name }}</p>  
+            <div class="details" v-if="device.expanded">  
+                <TimerView :device="device" />
             </div>
         </div>
     </div>

@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 20px;
-    width: 100%;
-    max-width: 600px;
+    width: 40%;
+    min-width: 40%;
+    margin-left: 10px;
 }
 .device {
     width: 100%;
