@@ -1,14 +1,24 @@
 <script>
+import PieChartView from '../views/PieChartView.vue';
 import './main.css';
 import './mobile.css';
 
 export default {
     name: 'ChartView',
+    components: {
+        PieChartView
+    },
+    props: {
+        dataArray: Array,
+        nameArray: Array
+    }
 };
 </script>
 
 <template>
     <div class="chart-view">
-        <h3>Some sort of chart to be displayed here</h3>
+        <PieChartView 
+        :dataArray="this.dataArray"
+        :nameArray="this.nameArray"/>
     </div>
 </template>

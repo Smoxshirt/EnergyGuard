@@ -7,6 +7,8 @@ import './mobile.css';
   export default {
     data(){
       return{
+        nameArray: Array,
+        totalConsumptionArray: Array
       }
     },
     props:{
@@ -17,6 +19,19 @@ import './mobile.css';
       ChartView,
       DeviceView,
     },
+    methods: {
+      generateGraphArrays(){
+                this.nameArray = new Array(this.model.devices.length);
+                this.totalConsumptionArray = new Array(this.model.devices.length);
+                for (let i = 0; i < this.model.devices.length; i++){
+                    this.nameArray[i] = this.model.devices[i].name;
+                    this.totalConsumptionArray[i] = this.model.devices[i].periodTotal;
+                }
+            }
+    },
+    created(){
+      this.generateGraphArrays();
+    }
   };
 </script>
 
@@ -37,7 +52,9 @@ import './mobile.css';
 
 
     <div class="home-view">
-      <ChartView />
+      <ChartView 
+      :dataArray="this.totalConsumptionArray"
+      :nameArray="this.nameArray"/>
       <DeviceView :model="this.model"/>
     </div>
   </main>
