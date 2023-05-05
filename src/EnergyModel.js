@@ -1,4 +1,6 @@
-import { writeUserData } from "./firebaseModel.js"
+import { writeUserData } from "./firebaseModel.js";
+import { getCurrentPrice } from "./priceSource.js";
+import { resolvePromise } from "./resolvePromise.js";
 
 class EnergyModel{
 
@@ -15,6 +17,7 @@ class EnergyModel{
         this.startTime = 0;
         this.endTime = 99999999;
         this.updatePeriodConsumption();
+        this.pricePromiseState = {};
     }
 
     addDeviceListToDatabase(){
@@ -56,6 +59,10 @@ class EnergyModel{
     setPeriod(start, end){
         this.startTime = start;
         this.endTime = end;
+    }
+
+    getCurrentEnergyPrice(){
+        resolvePromise(getCurrentPrice(), this.pricePromiseState)
     }
 
 }
