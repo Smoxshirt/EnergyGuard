@@ -116,10 +116,10 @@
       <input type="text" @change="inputChange" placeholder="Input to database" />
     </div>
     <div>
-      <button @click="testFunction">Write</button>
+      <button class="buttons2" @click="testFunction">Write</button>
     </div>
     <div>
-      <button @click="readFunction">Read</button>
+      <button class="buttons2" @click="readFunction">Read</button>
     </div>
     <div>
       Data from database:&nbsp;{{ this.readData }}
@@ -131,29 +131,29 @@
         <input type="text" @change="customChange" placeholder="Path" />
       </div>
       <div>
-        <button @click="readFunctionB">Read</button>
+        <button class="buttons2" @click="readFunctionB">Read</button>
       </div>
       <div>
         Set turnoff flag
       </div>
       <div>
-        <button @click="turnOff">Turn off</button>
+        <button class="buttons2" @click="turnOff">Turn off</button>
       </div>
       <div>
-        <button @click="turnOn">Turn on</button>
+        <button class="buttons2" @click="turnOn">Turn on</button>
       </div>
       
       <div>
         Add large array
       </div>
       <div>
-        <button @click="addLargeArray">Array</button>
+        <button class="buttons2" @click="addLargeArray">Array</button>
       </div>
       <div>
         Update devices in model from firebase
       </div>
       <div>
-        <button @click="getDevices">Update</button>
+        <button class="buttons2" @click="getDevices">Update</button>
       </div>
     </div>
     

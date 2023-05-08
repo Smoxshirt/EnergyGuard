@@ -101,11 +101,11 @@
         <input @change="updateEndTime" placeholder="End" />
     </div>
     <div>
-        <button @click="setPeriod">Set period</button>
+        <button class="buttons2" @click="setPeriod">Set period</button>
     </div>
     <br>
     <div>
-        <button @click="setLine">Line</button> <button @click="setBar">Bar</button> <button @click="setPie">Pie</button>
+        <button class="buttons2" @click="setLine">Line</button> <button class="buttons2" @click="setBar">Bar</button> <button class="buttons2" @click="setPie">Pie</button>
     </div>
     <h4>Consumption overview between {{ this.model.startTime }} and {{ this.model.endTime }}</h4>
     <div v-for="device in this.model.devices">

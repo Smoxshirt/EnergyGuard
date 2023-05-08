@@ -9,6 +9,14 @@
                 chartReady: false
             }
         },
+        props: ["priceData"],
+        computed: {
+            priceTitle() {
+                const date=new Date();
+                console.log(this.priceData.data[0])
+                return this.priceData.data[date.getHours()].SEK_per_kWh;
+            }
+        },
         methods: {
             updateGraph(){
             console.log("Updated");
@@ -37,7 +45,10 @@
             },
             options: {}
             });
-        }
+        },
+            getPrice(){
+                this.$emit('getPrice')
+            }
         },
         created(){
 
@@ -81,4 +92,6 @@
     <div>
         <button @click="updateGraph">Update graph</button>
     </div>
+
+    <h3>Price: {{ priceTitle }} kr/KWh</h3>
 </template>
