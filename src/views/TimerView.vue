@@ -35,7 +35,7 @@ export default {
         setScheduledTimer() {
             const selectedDateTime = new Date(this.currentDateTime);
             const timestamp = selectedDateTime.getTime();
-            console.log(timestamp);
+            console.log("scheduled time " + timestamp);
         },
         setTimer() {
             console.log("current time " + new Date().getTime())

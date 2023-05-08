@@ -5,8 +5,10 @@
     export default {
         data(){
             return{
-                startTime: 10002,
-                endTime: 10007,
+              //  startTime: 10002,
+              //  endTime: 10007,
+                startTime: this.toFormattedDate(10002),
+                endTime: this.toFormattedDate(10007),
                 periodConsumption: [],
                 graphData: [],
                 graphLabels: [],
@@ -27,6 +29,14 @@
             model: Object
         },
         methods: {
+            toFormattedDate(dayNumber) {
+                const date = new Date(dayNumber * 24 * 60 * 60 * 1000);
+                const year = date.getFullYear();
+                const month = (date.getMonth() + 1).toString().padStart(2, "0");
+                const day = date.getDate().toString().padStart(2, "0");
+                
+                return `${year}-${month}-${day}`;
+            },
             periodCheck(update){
                     return (update[1] === this.startTime || (update[1] > this.startTime && update[1] < this.endTime) || update[1] === this.endTime);
                 },
@@ -45,10 +55,14 @@
                 // this.generateGraphArrays();
             },
             updateStartTime(e){
-                this.startTime = e.target.value;
+                //this.startTime = e.target.value;
+                const date = new Date(e.target.value);
+                this.startTime = Math.floor(date.getTime() / (24 * 60 * 60 * 1000));
             },
             updateEndTime(e){
-                this.endTime = e.target.value;
+                //this.endTime = e.target.value;
+                const date = new Date(e.target.value);
+                this.endTime = Math.floor(date.getTime() / (24 * 60 * 60 * 1000));
             },
             generateGraphArrays(){
                 /* this.graphData = new Array(this.model.devices[0].periodConsumption.length);
@@ -95,10 +109,10 @@
     <div class="general-container">
     <h4>Please enter start and end date for the period</h4>
     <div>
-        <input @change="updateStartTime" placeholder="Start" />
+       <p>From</p> <input type="datetime-local" @change="updateStartTime" placeholder="Start" />
     </div>
     <div>
-        <input @change="updateEndTime" placeholder="End" />
+       <p>To</p> <input type="datetime-local" @change="updateEndTime" placeholder="End" />
     </div>
     <div>
         <button class="buttons2" @click="setPeriod">Set period</button>
@@ -107,10 +121,13 @@
     <div>
         <button class="buttons2" @click="setLine">Line</button> <button class="buttons2" @click="setBar">Bar</button> <button class="buttons2" @click="setPie">Pie</button>
     </div>
-    <h4>Consumption overview between {{ this.model.startTime }} and {{ this.model.endTime }}</h4>
-    <div v-for="device in this.model.devices">
-        Total energy consumption for {{ device.name }}:&nbsp;{{ device.periodTotal }}
+    <div>
+        <h4>Consumption overview between {{ toFormattedDate(this.model.startTime) }} and {{ toFormattedDate(this.model.endTime) }}</h4>
+        <div v-for="device in this.model.devices">
+            Total energy consumption for {{ device.name }}:&nbsp;{{ device.periodTotal }}
+        </div>
     </div>
+ 
     <LineChartView v-if="this.displayLine"
     :dataArray="this.graphArray" 
     :labelArray="this.model.devices[0].graphLabels"
