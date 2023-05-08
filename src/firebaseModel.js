@@ -9,13 +9,37 @@ import EnergyModel from "./EnergyModel";
 // Instructions from Firebase.
 import {initializeApp} from "firebase/app";
 import {getDatabase, ref, set, get, onChildRemoved, onChildAdded, onValue} from "firebase/database";
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged} from "firebase/auth";
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
 
 const REF="EnergyGuard";
+
+function observeAuth(callback){
+    onAuthStateChanged(auth, callback)
+}
+
+function testFunction(){
+    console.log(auth.currentUser);
+}
+
+function isLoggedIn(){
+    if(auth.currentUser){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function getEmail(){
+    if(auth.currentUser){
+        return auth.currentUser.email;
+    }else{
+        return "";
+    }
+}
 
 function errorCallback(error){
     alert(error);
@@ -134,4 +158,4 @@ function writeUserData(path, data) {
   }
 
 
-export { createNewUser, signInUser, signOutUser, writeUserData, readUserData };
+export { createNewUser, signInUser, signOutUser, writeUserData, readUserData, testFunction, isLoggedIn, getEmail, observeAuth };

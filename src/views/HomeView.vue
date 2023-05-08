@@ -41,12 +41,16 @@ import './mobile.css';
       <div>
      <p class="p-welcome">Welcome!</p>
     </div>
-
-    <div v-if="this.model.isSignedIn">
-      <p class="p-welcome">You are logged in as {{ this.model.emailAddress }}.</p>
+    <div v-if="this.model.waitingForUserData">
+      <p class="p-welcome">Waiting for user data...</p>
     </div>
-    <div v-if="!this.model.isSignedIn">
-      <p class="p-welcome">You are not logged in.</p>
+    <div v-if="!this.model.waitingForUserData">
+      <div v-if="this.model.isSignedIn">
+        <p class="p-welcome">You are logged in as {{ this.model.emailAddress }}.</p>
+      </div>
+      <div v-if="!this.model.isSignedIn">
+        <p class="p-welcome">You are not logged in.</p>
+      </div>
     </div>
     </div>
 

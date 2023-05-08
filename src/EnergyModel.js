@@ -1,4 +1,4 @@
-import { writeUserData } from "./firebaseModel.js";
+import { writeUserData, isLoggedIn, getEmail } from "./firebaseModel.js";
 import { getCurrentPrice } from "./priceSource.js";
 import { resolvePromise } from "./resolvePromise.js";
 
@@ -14,11 +14,20 @@ class EnergyModel{
         {id: 5, name: 'Computer', isTurnedOn: false, expanded: false, consumption: [[20, 10002],[5, 10003],[4, 10004],[8, 10005],[7, 10006],[6, 10007],[6, 10008]], periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: []}];
         this.isSignedIn = false;
         this.testText = "Text from model";
-        this.emailAddress = "holder";
+        this.emailAddress = "";
         this.startTime = 0;
         this.endTime = 99999999;
         this.updatePeriodConsumption();
         this.pricePromiseState = {};
+        this.waitingForUserData = true;
+    }
+
+
+    updateUserStatus(){
+        this.isSignedIn = isLoggedIn();
+        this.emailAddress = getEmail();
+        console.log(this.isSignedIn);
+        console.log(this.emailAddress);
     }
 
     addDeviceListToDatabase(){

@@ -1,6 +1,7 @@
 
 
 <script>
+import { observeAuth } from "./firebaseModel.js";
 import { RouterLink, RouterView } from 'vue-router';
 import HeaderView from './views/HeaderView.vue';
 import EnergyModel from './EnergyModel.js';
@@ -21,7 +22,24 @@ export default {
 
   created() {
     this.model = new EnergyModel();
+    this.model.updateUserStatus();
+    observeAuth(this.authCallback.bind(this));
   },
+
+  methods: {
+    authCallback(user){
+      this.model.waitingForUserData = false;
+      if(user){
+            this.model.isSignedIn = true;
+            this.model.emailAddress = user.email;
+            console.log("Callback FROM APP with logged in user")
+        }else{
+            this.model.isSignedIn = false;
+            this.model.emailAddress = "";
+            console.log("Callback FROM APP WITHOUT logged in user")
+        }
+    }
+  }
 };
 </script>
 

@@ -1,5 +1,5 @@
 <script>
-  import { writeUserData, readUserData } from "../firebaseModel.js"
+  import { writeUserData, readUserData, testFunction, isLoggedIn, getEmail } from "../firebaseModel.js"
   import './main.css';
   export default {
     props: {
@@ -89,6 +89,11 @@
       updateCallback(snapshot){
         console.log(snapshot.val());
         this.model.devices = snapshot.val().value;
+      },
+      doSomething(){
+        testFunction();
+        this.model.updateUserStatus();
+
       }
     },
     data(){
@@ -154,6 +159,9 @@
       </div>
       <div>
         <button class="buttons2" @click="getDevices">Update</button>
+      </div>
+      <div>
+        <button class="buttons2" @click="doSomething">Placeholder</button>
       </div>
     </div>
     
