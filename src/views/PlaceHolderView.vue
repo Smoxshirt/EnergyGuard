@@ -66,6 +66,20 @@
           largeArray3[i] = [Math.random() * 50, i];
         }
         this.model.devices[2].consumption = largeArray3;
+
+        var largeArray4 = new Array(1000);
+        for (let i = 0; i < 10000; i++){
+          largeArray4[i] = [Math.random() * 50, i];
+        }
+        this.model.devices[3].consumption = largeArray4;
+
+        var largeArray5 = new Array(1000);
+        for (let i = 0; i < 10000; i++){
+          largeArray5[i] = [Math.random() * 50, i];
+        }
+        this.model.devices[4].consumption = largeArray5;
+
+        console.log(this.model.devices);
         
         writeUserData("devicelist", this.model.devices);
       },
