@@ -7,6 +7,18 @@
         components: {
             RouterLink,
         },
+        methods: {
+            displayText(){
+                if(this.model.isSignedIn){
+                    return "Account";
+                }else{
+                    return "Login";
+                }
+            }
+        },
+        props: {
+            model: {}
+        }
     };
 </script>
 
@@ -31,7 +43,7 @@
             <h1 class="header-energyguard">EnergyGuard</h1>
             <img class="logo" src="./energyguard.png" alt="">
         </div>
-        <RouterLink to="/login" class="login-button">Login</RouterLink>
+        <RouterLink to="/login" class="login-button">{{ this.displayText() }}</RouterLink>
         <div></div>
     </header>
 </template>

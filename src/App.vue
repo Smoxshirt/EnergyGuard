@@ -44,7 +44,7 @@ export default {
 </script>
 
 <template>
-  <HeaderView />
+  <HeaderView :model="this.model" />
   <RouterView :model="this.model" />
 </template>
 
