@@ -85,13 +85,16 @@
 </script>
 
 <template>
-    <div>
-        <canvas id="myChart" class="canvas"></canvas>
-    </div>
-    Here be graphs (soon).
-    <div>
-        <button @click="updateGraph">Update graph</button>
-    </div>
+    <div class="general-container">
+        <div>
+            <canvas id="myChart" class="canvas"></canvas>
+        </div>
+        Here be graphs (soon).
+        <div>
+            <button @click="updateGraph">Update graph</button>
+        </div>
 
     <h3>Price: {{ priceTitle }} kr/KWh</h3>
+    </div>
+
 </template>
