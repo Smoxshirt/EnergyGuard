@@ -5,6 +5,7 @@ import { resolvePromise } from "./resolvePromise.js";
 class EnergyModel{
 
     constructor(){
+        this.observers = [];
         this.devices = [
         {id: 1, name: 'Lamp', isTurnedOn: false, expanded: false, consumption: [[8, 10002],[8, 10003],[9, 10004],[7, 10005],[10, 10006],[6, 10007],[8, 10008]], periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: []},
         {id: 2, name: 'Fan', isTurnedOn: false, expanded: false, consumption: [[15, 10002],[15, 10003],[21, 10004],[22, 10005],[20, 10006],[15, 10007],[15, 10008]], periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: []},
@@ -65,6 +66,32 @@ class EnergyModel{
         resolvePromise(getCurrentPrice(), this.pricePromiseState)
     }
 
+    addDevice(){
+
+    }
+
+    removeDevice(){
+
+    }
+
+    notifyObservers(payload){
+        function invokeObserverCB(obs){
+            try{obs(payload);}
+            catch(err){console.log(err);}
+        }
+        this.observers.forEach(invokeObserverCB);
+    }
+
+    addObserver(addObserverACB){
+        this.observers = [...this.observers, addObserverACB];
+    }
+
+    removeObserver(removeObserverACB){
+        function removeObsCB(obs){
+            return obs!==removeObserverACB;
+        }
+        this.observers = this.observers.filter(removeObsCB);
+    }
 }
 
 export default EnergyModel;
