@@ -1,10 +1,11 @@
 <script>
 import LoginView from '../views/LoginView.vue'
-import { createNewUser, signInUser, signOutUser } from '../firebaseModel';
+import { createNewUser, signInUser, signOutUser, changePassword } from '../firebaseModel';
 export default {
     data(){
         return {
             testVal: "Potato",
+            changeFlag: false,
             email: "",
             password: "",
         }
@@ -14,7 +15,6 @@ export default {
     },
     methods: {
         storeData(mail, pw){
-            //change this from firebase?
             this.email = mail;
             this.password = pw;
             createNewUser(mail, pw, this.signupCallback.bind(this));
@@ -27,6 +27,10 @@ export default {
         login(mail, pw){
             signInUser(mail,pw, this.signInCallback.bind(this));
         },
+        
+        changePassword(pw){
+            changePassword(pw,this.passwordChangeCallback.bind(this));
+        },
         signupCallback(){
             alert("Signed up!");
         },
@@ -38,6 +42,13 @@ export default {
         },
         signOutCallback(){
             this.model.isSignedIn = false;
+        },
+        passwordChangeCallback(){
+            alert("Password changed!");
+        },
+        changePwFlag(){
+            this.changeFlag=!this.changeFlag;
+            console.log(this.changeFlag)
         }
     },
     props: {
@@ -51,7 +62,10 @@ export default {
         <LoginView @signup-info="storeData" 
         @user-logout="logout" 
         @user-login="login" 
+        @change-password="changePassword"
+        @changePwFlag="changePwFlag"
         :isSignedIn=this.model.isSignedIn
+        :changeFlag=this.changeFlag
         :getMailAddress=this.model.emailAddress />
     </div>
 </template>

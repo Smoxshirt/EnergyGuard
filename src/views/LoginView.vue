@@ -1,5 +1,6 @@
 <script>
-    import './main.css';
+    import { changePassword } from '../firebaseModel';
+import './main.css';
     import './mobile.css';
     export default {
         methods: {
@@ -17,6 +18,12 @@
             },
             signup(){
                 this.$emit('signup-info', this.email, this.password);
+            },
+            changePassword(){
+                this.$emit('change-password', this.password);
+            },
+            changePwFlag(){
+                this.$emit('changePwFlag');
             }
         },
         data(){
@@ -25,10 +32,11 @@
                 password: "",
             }
         },
-        emits:['signup-info', 'user-logout', 'user-login'],
+        emits:['signup-info', 'user-logout', 'user-login', 'change-password', 'changePwFlag'],
         props:{
             isSignedIn: Boolean,
-            getMailAddress: String
+            getMailAddress: String,
+            changeFlag: Boolean
         },
         computed: {
             email() {
@@ -53,10 +61,24 @@
             <button @click="login" class="buttons2">Log in</button>
         </div>
         <div v-else>
-        <button @click="logout" class="buttons2">Log out</button>
+            <button @click="logout" class="buttons2">Log out</button>
+        </div>
+
+
+        <div v-if="this.isSignedIn">
+            <button @click="changePwFlag" class="buttons2">Change password</button>
+        </div>
+        <div v-if="this.isSignedIn && this.changeFlag">
+            <input type="password" @change="passwordChange" placeholder="New password" />
+        </div>
+        <div v-if="this.isSignedIn && this.changeFlag">
+            <button @click="changePassword" class="buttons2">Change it!</button>
+        </div>
+        <div v-if="this.isSignedIn && this.changeFlag">
+            <button @click="changePwFlag" class="buttons2">Cancel</button>
         </div>
         <div v-if="!this.isSignedIn">
-        <button @click="signup" class="buttons2">Sign up</button>
+            <button @click="signup" class="buttons2">Sign up</button>
         </div>
     </div>
 </template>
