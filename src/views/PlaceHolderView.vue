@@ -91,9 +91,22 @@
         this.model.devices = snapshot.val().value;
       },
       doSomething(){
-        testFunction();
-        this.model.updateUserStatus();
-
+        const statusObj = [
+          {id: 1, name: "Lamp", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: true},
+          {id: 2, name: "Fan", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
+          {id: 3, name: "TV", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
+          {id: 4, name: "Fridge", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
+          {id: 5, name: "Computer", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
+        ];
+        const consObj = [
+          {id: 1, values: [[25, 5000]]},
+          {id: 2, values: [[25, 5000]]},
+          {id: 3, values: [[25, 5000]]},
+          {id: 4, values: [[25, 5000]]},
+          {id: 5, values: [[25, 5000]]},
+        ];
+        writeUserData("status", statusObj);
+        writeUserData("consumption", consObj);
       }
     },
     data(){

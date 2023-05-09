@@ -47,7 +47,7 @@
             <input type="text" @change="mailChange" placeholder="E-mail" />
         </div>
         <div v-if="!this.isSignedIn">
-            <input type="password" @change="passwordChange" placeholder="Password" />
+            <input @keyup.enter="login" type="password" @change="passwordChange" placeholder="Password" />
         </div>
         <div v-if="!this.isSignedIn">
             <button @click="login" class="buttons2">Log in</button>
