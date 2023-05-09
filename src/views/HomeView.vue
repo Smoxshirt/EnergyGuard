@@ -55,7 +55,7 @@ import './mobile.css';
     </div>
 
 
-    <div class="home-view">
+    <div class="home-view" v-if="this.model.isSignedIn">
       <ChartView 
       :dataArray="this.totalConsumptionArray"
       :nameArray="this.nameArray"/>

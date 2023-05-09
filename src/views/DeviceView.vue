@@ -3,6 +3,7 @@ import './DeviceView.css';
 import './main.css';
 import './mobile.css';
 import TimerView from './TimerView.vue';
+import LimitView from './LimitView.vue';
 import { writeUserData, readUserData } from "../firebaseModel.js"
 export default {
   methods: {
@@ -21,6 +22,7 @@ export default {
   },
   components: {
     TimerView,
+    LimitView,
   },
   created(){
     console.log(this.model)
@@ -39,7 +41,7 @@ export default {
             <div class="device-top">
                 <div class="device-content">
                     <h3>{{ device.name }}</h3>
-                    <p>Status: Timerstatus {{ device.status }}</p>
+                    <p>Status: Timer: 0 {{ device.status }} Limit: 0 </p>
                     </div>
                     <button class="on-off-button" :class="[device.isTurnedOn ? 'green' : 'red']" @click="toggleActive(device)">{{ device.isTurnedOn ? 'ON' : 'OFF' }}</button>
                     <button class="expand-button" @click="toggleExpand(device)">
@@ -49,6 +51,7 @@ export default {
                 </div>  
             <div class="details" v-if="device.expanded">  
                 <TimerView :device="device" />
+                <LimitView />
             </div>
         </div>
     </div>

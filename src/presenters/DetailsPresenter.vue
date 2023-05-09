@@ -9,6 +9,8 @@
               //  endTime: 10007,
                 startTime: this.toFormattedDate(10002),
                 endTime: this.toFormattedDate(10007),
+        //        startTime: this.toFormattedDate2(10002),
+        //        endTime: this.toFormattedDate2(10007),
                 periodConsumption: [],
                 graphData: [],
                 graphLabels: [],
@@ -37,7 +39,17 @@
                 
                 return `${year}-${month}-${day}`;
             },
-            periodCheck(update){
+            toFormattedDate2() {
+                const date = new Date();
+                const year = now.getFullYear();
+                const month = (now.getMonth() + 1).toString().padStart(2, '0');
+                const day = now.getDate().toString().padStart(2, '0');
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                
+                return `${year}-${month}-${day}T${hours}:${minutes}`;                
+            },
+            setperiodCheck(update){
                     return (update[1] === this.startTime || (update[1] > this.startTime && update[1] < this.endTime) || update[1] === this.endTime);
                 },
             consumptionDuringTimePeriod(){
@@ -106,7 +118,18 @@
 </script>
 
 <template>
-    <div class="general-container">
+    <div class="welcome-container" v-if="!this.model.isSignedIn">
+        <div>
+     <p class="p-welcome">Welcome!</p>
+    </div>
+    <div v-if="!this.model.waitingForUserData">
+      <div v-if="!this.model.isSignedIn">
+        <p class="p-welcome">You are not logged in.</p>
+      </div>
+    </div>
+    </div>
+
+    <div class="general-container" v-if="this.model.isSignedIn">
     <h4>Please enter start and end date for the period</h4>
     <div>
        <p>From</p> <input type="datetime-local" @change="updateStartTime" placeholder="Start" />
@@ -121,26 +144,38 @@
     <div>
         <button class="buttons2" @click="setLine">Line</button> <button class="buttons2" @click="setBar">Bar</button> <button class="buttons2" @click="setPie">Pie</button>
     </div>
-    <div>
-        <h4>Consumption overview between {{ toFormattedDate(this.model.startTime) }} and {{ toFormattedDate(this.model.endTime) }}</h4>
-        <div v-for="device in this.model.devices">
-            Total energy consumption for {{ device.name }}:&nbsp;{{ device.periodTotal }}
+
+    <div class="chart-container">
+    <div class="charts">
+        <LineChartView v-if="this.displayLine"
+        :dataArray="this.graphArray" 
+        :labelArray="this.model.devices[0].graphLabels"
+        :nameArray="this.nameArray" />
+
+
+        <PieChartView v-if="this.displayPie"
+        :dataArray="this.totalConsumptionArray"
+        :nameArray="this.nameArray" />
+
+        <BarChartView v-if="this.displayBar"
+        :dataArray="this.totalConsumptionArray"
+        :nameArray="this.nameArray" />
+    </div>
+
+
+    <div class="consumption-overview-stats">
+            <h4 class="nomargin-nopadding">Consumption</h4> 
+            <h4 class="nomargin-nopadding">overview</h4> 
+            <h4 class="nomargin-nopadding-up">between </h4> 
+            <h4 class="nomargin-nopadding">{{ toFormattedDate(this.model.startTime) }}</h4>
+            <h4 class="nomargin-nopadding">and</h4>
+            <h4 class="nomargin-nopadding-up">{{ toFormattedDate(this.model.endTime) }}</h4>
+            <div v-for="device in this.model.devices">
+                 {{ device.name }}:&nbsp;{{ device.periodTotal }}
+            </div>
         </div>
     </div>
- 
-    <LineChartView v-if="this.displayLine"
-    :dataArray="this.graphArray" 
-    :labelArray="this.model.devices[0].graphLabels"
-    :nameArray="this.nameArray" />
 
-
-    <PieChartView v-if="this.displayPie"
-    :dataArray="this.totalConsumptionArray"
-    :nameArray="this.nameArray" />
-
-    <BarChartView v-if="this.displayBar"
-    :dataArray="this.totalConsumptionArray"
-    :nameArray="this.nameArray" />
 
 </div>
 

@@ -35,7 +35,13 @@ export default {
         setScheduledTimer() {
             const selectedDateTime = new Date(this.currentDateTime);
             const timestamp = selectedDateTime.getTime();
-            console.log("scheduled time " + timestamp);
+            if(timestamp < new Date()) {
+                console.log("can not set timer earlier than current date");
+            }
+            else {
+                console.log("scheduled time " + timestamp);
+            }
+            
         },
         setTimer() {
             console.log("current time " + new Date().getTime())
@@ -47,7 +53,13 @@ export default {
                 this.seconds * 1000
             );
             const timestamp = targetTime.getTime();
-            console.log("current time + timer " + timestamp);
+            if(timestamp < new Date()) {
+                console.log("can not set timer earlier than current date");
+            }
+            else {
+                console.log("current time + timer " + timestamp);
+            }
+
         },
     },
 };

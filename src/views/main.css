@@ -101,6 +101,15 @@ h1, h2, h3, h4, h5, h6, p {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
+.buttons2-autoWidth {
+    cursor: pointer;
+    height: 30px;
+    width: auto;
+    border-radius: 6px;
+    padding: 5px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
 
 .timer-button {
     cursor: pointer;
@@ -124,6 +133,7 @@ h1, h2, h3, h4, h5, h6, p {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Arial;
 }
 
 .dropdown-button {
@@ -267,10 +277,10 @@ canvas {
     border-color:black;
     border-width: 10px;
     padding:10px;
-    width:80% !important;
+    width:70% !important;
     height:auto !important;
-    max-width: 1000px !important;
-    min-width: 1000px !important;
+    max-width: 900px !important;
+    min-width: 900px !important;
 }
 
 .h1energy {
@@ -295,4 +305,47 @@ canvas {
     background-color: #ccc;
     border-radius: 10px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.consumption-overview-stats {
+    margin: auto;
+    display: flex;
+    width: max-content;
+    height: auto;
+    padding: 20px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.chart-container {
+    margin: 0;
+    padding: 0;
+}
+
+.charts {
+    float: left;
+}
+
+.nomargin-nopadding {
+    margin: 0;
+    padding: 0;
+}
+.nomargin-nopadding-up {
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+.timer-view {
+
+}
+
+.timer-content {
+    margin-bottom: 30px;
 }
