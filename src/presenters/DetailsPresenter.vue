@@ -7,10 +7,10 @@
             return{
               //  startTime: 10002,
               //  endTime: 10007,
-                startTime: this.toFormattedDate(10002),
-                endTime: this.toFormattedDate(10007),
-        //        startTime: this.toFormattedDate2(10002),
-        //        endTime: this.toFormattedDate2(10007),
+           //     startTime: this.toFormattedDate(10002),
+           //     endTime: this.toFormattedDate(10007),
+                startTime: 10002 * 24 * 60 * 60 * 1000,
+                endTime: 10007 * 24 * 60 * 60 * 1000,
                 periodConsumption: [],
                 graphData: [],
                 graphLabels: [],
@@ -39,15 +39,15 @@
                 
                 return `${year}-${month}-${day}`;
             },
-            toFormattedDate2() {
-                const date = new Date();
-                const year = now.getFullYear();
-                const month = (now.getMonth() + 1).toString().padStart(2, '0');
-                const day = now.getDate().toString().padStart(2, '0');
-                const hours = now.getHours().toString().padStart(2, '0');
-                const minutes = now.getMinutes().toString().padStart(2, '0');
+            toFormattedDate2(timestamp) {
+                const date = new Date(timestamp);
+                const year = date.getFullYear();
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const day = date.getDate().toString().padStart(2, '0');
+                const hours = date.getHours().toString().padStart(2, '0');
+                const minutes = date.getMinutes().toString().padStart(2, '0');
                 
-                return `${year}-${month}-${day}T${hours}:${minutes}`;                
+                return `${year}-${month}-${day} ${hours}:${minutes}`;                
             },
             setperiodCheck(update){
                     return (update[1] === this.startTime || (update[1] > this.startTime && update[1] < this.endTime) || update[1] === this.endTime);
@@ -69,12 +69,16 @@
             updateStartTime(e){
                 //this.startTime = e.target.value;
                 const date = new Date(e.target.value);
-                this.startTime = Math.floor(date.getTime() / (24 * 60 * 60 * 1000));
+               // this.startTime = Math.floor(date.getTime() / (24 * 60 * 60 * 1000));
+                this.startTime = date.getTime();
+                console.log(this.startTime);
             },
             updateEndTime(e){
                 //this.endTime = e.target.value;
                 const date = new Date(e.target.value);
-                this.endTime = Math.floor(date.getTime() / (24 * 60 * 60 * 1000));
+                //this.endTime = Math.floor(date.getTime() / (24 * 60 * 60 * 1000));
+                this.endTime = date.getTime();
+                console.log(this.endTime);
             },
             generateGraphArrays(){
                 /* this.graphData = new Array(this.model.devices[0].periodConsumption.length);
@@ -167,9 +171,9 @@
             <h4 class="nomargin-nopadding">Consumption</h4> 
             <h4 class="nomargin-nopadding">overview</h4> 
             <h4 class="nomargin-nopadding-up">between </h4> 
-            <h4 class="nomargin-nopadding">{{ toFormattedDate(this.model.startTime) }}</h4>
+            <h4 class="nomargin-nopadding">{{ toFormattedDate2(this.model.startTime) }}</h4>
             <h4 class="nomargin-nopadding">and</h4>
-            <h4 class="nomargin-nopadding-up">{{ toFormattedDate(this.model.endTime) }}</h4>
+            <h4 class="nomargin-nopadding-up">{{ toFormattedDate2(this.model.endTime) }}</h4>
             <div v-for="device in this.model.devices">
                  {{ device.name }}:&nbsp;{{ device.periodTotal }}
             </div>
