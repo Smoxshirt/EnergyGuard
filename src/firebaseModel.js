@@ -9,7 +9,7 @@ import EnergyModel from "./EnergyModel";
 // Instructions from Firebase.
 import {initializeApp} from "firebase/app";
 import {getDatabase, ref, set, get, onChildRemoved, onChildAdded, onValue} from "firebase/database";
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,updatePassword, signOut, onAuthStateChanged} from "firebase/auth";
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,updatePassword, signOut, onAuthStateChanged, sendPasswordResetEmail, confirmPasswordReset} from "firebase/auth";
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
@@ -60,7 +60,19 @@ function signOutUser(callback) {
 function changePassword(newPassword, callback){
     updatePassword(auth.currentUser, newPassword).then(callback).catch(errorCallback);
 }
+/*
+export const passwordReset = async (email: string) => {
+    return await sendPasswordResetEmail(auth, email)
+  }
 
+  export const confirmThePasswordReset = async (
+    oobCode:string, newPassword:string
+  ) => {
+    if(!oobCode && !newPassword) return;
+    
+    return await confirmPasswordReset(auth, oobCode, newPassword)
+  }
+*/
 /*
 function payloadACB(payload){ //with observer change, changes info on firebase
     //add date? add device? 

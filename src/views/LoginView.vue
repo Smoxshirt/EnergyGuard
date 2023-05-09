@@ -24,6 +24,10 @@ import './main.css';
             },
             changePwFlag(){
                 this.$emit('changePwFlag');
+            },
+            buttonEvent(){
+                this.changePassword();
+                this.changePwFlag();
             }
         },
         data(){
@@ -72,7 +76,7 @@ import './main.css';
             <input type="password" @change="passwordChange" placeholder="New password" />
         </div>
         <div v-if="this.isSignedIn && this.changeFlag">
-            <button @click="changePassword" class="buttons2">Change it!</button>
+            <button @click="buttonEvent" class="buttons2">Change it!</button>
         </div>
         <div v-if="this.isSignedIn && this.changeFlag">
             <button @click="changePwFlag" class="buttons2">Cancel</button>
