@@ -31,6 +31,12 @@ import './mobile.css';
     },
     created(){
       this.generateGraphArrays();
+    },
+    beforeUpdate(){
+      this.generateGraphArrays();
+    },
+    updated(){
+      
     }
   };
 </script>

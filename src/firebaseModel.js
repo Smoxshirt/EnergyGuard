@@ -157,5 +157,11 @@ function writeUserData(path, data) {
     }
   }
 
+  function readUserDataModel(path, callback){
+        const db = getDatabase();
+        const fullPath = ref(db, 'users/' + auth.currentUser.uid + "/" + path);
+        onValue(fullPath, callback);
+  }
 
-export { createNewUser, signInUser, signOutUser, writeUserData, readUserData, testFunction, isLoggedIn, getEmail, observeAuth };
+
+export { createNewUser, signInUser, signOutUser, writeUserData, readUserData, testFunction, isLoggedIn, getEmail, observeAuth, readUserDataModel };
