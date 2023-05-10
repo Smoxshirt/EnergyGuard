@@ -1,6 +1,7 @@
 <script>
 import './main.css';
 import './mobile.css';
+import { writeUserData, readUserData } from "../firebaseModel.js"
 
 export default {
     name: 'LimitView',
@@ -18,11 +19,12 @@ export default {
             if(limit < 0) {
                 console.log("Can not set negative limit");
             }
-            else if(limit === 0) {
-                console.log("send remove limit to firebase");
-            }
             else {
                 console.log(limit);
+
+                var path = "devicelist/value/" + (this.device.id - 1) + "/limit";
+                console.log(path);
+                writeUserData(path, limit);
             }
         },
     },

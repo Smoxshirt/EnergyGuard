@@ -59,7 +59,7 @@ export default {
                 </div>  
             <div class="details" v-if="device.expanded">  
                 <TimerView :device="device" @set-timer="setTimer" />
-                <LimitView />
+                <LimitView :device="device" />
             </div>
         </div>
     </div>

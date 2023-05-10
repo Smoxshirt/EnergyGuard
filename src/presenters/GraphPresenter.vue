@@ -3,7 +3,9 @@
     import { getCurrentPrice } from '../priceSource';
     import { resolvePromise } from '../resolvePromise';
     export default {
-        props: ["model"],
+        props: {
+            model: {}
+        },
         data(){
             return {
 
@@ -39,6 +41,7 @@
         <GraphView
         
         :priceData="priceData"
-        @getPrice="getPrice"/>
+        @getPrice="getPrice"
+        :isSignedIn=this.model.isSignedIn />
     </div>
 </template>

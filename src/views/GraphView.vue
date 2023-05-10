@@ -9,7 +9,7 @@
                 chartReady: false
             }
         },
-        props: ["priceData"],
+        props:  ["priceData", "isSignedIn"],
         computed: {
             priceTitle() {
                 const date=new Date();
@@ -85,8 +85,19 @@
 </script>
 
 <template>
+
+    <div class="welcome-container" v-if="!this.isSignedIn">
+      <div>
+     <p class="p-welcome">Welcome!</p>
+    </div>
+    <div>
+      <div v-if="!this.isSignedIn">
+        <p class="p-welcome">You are not logged in.</p>
+      </div>
+    </div>
+    </div>
     
-    <div class="general-container">
+    <div class="general-container" v-if="this.isSignedIn">
         <div>
             <canvas id="myChart" class="canvas"></canvas>
         </div>
