@@ -1,6 +1,7 @@
 <script>
 import './main.css';
 import './mobile.css';
+import { writeUserData, readUserData } from "../firebaseModel.js"
 
 export default {
     name: 'LimitView',
@@ -23,6 +24,10 @@ export default {
             }
             else {
                 console.log(limit);
+
+                var path = "devicelist/value/" + (this.device.id - 1) + "/limit";
+                console.log(path);
+                writeUserData(path, limit);
             }
         },
     },

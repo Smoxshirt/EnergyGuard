@@ -1,6 +1,7 @@
 <script>
 import './main.css';
 import './mobile.css';
+import { writeUserData, readUserData } from "../firebaseModel.js"
 
 export default {
     name: 'TimerView',
@@ -40,6 +41,10 @@ export default {
             }
             else {
                 console.log("scheduled time " + timestamp);
+
+                var path = "devicelist/value/" + (this.device.id - 1) + "/timer";
+                console.log(path);
+                writeUserData(path, timestamp);
             }
             
         },
@@ -58,6 +63,10 @@ export default {
             }
             else {
                 console.log("current time + timer " + timestamp);
+
+                var path = "devicelist/value/" + (this.device.id - 1) + "/timer";
+                console.log(path);
+                writeUserData(path, timestamp);
             }
 
         },

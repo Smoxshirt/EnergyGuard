@@ -123,10 +123,10 @@
 
 <template>
     <div class="welcome-container" v-if="!this.model.isSignedIn">
-        <div>
+      <div>
      <p class="p-welcome">Welcome!</p>
     </div>
-    <div v-if="!this.model.waitingForUserData">
+    <div>
       <div v-if="!this.model.isSignedIn">
         <p class="p-welcome">You are not logged in.</p>
       </div>
