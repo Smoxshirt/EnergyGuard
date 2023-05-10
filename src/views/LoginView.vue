@@ -1,6 +1,6 @@
 <script>
     import { changePassword } from '../firebaseModel';
-import './main.css';
+    import './main.css';
     import './mobile.css';
     export default {
         methods: {
@@ -22,12 +22,23 @@ import './main.css';
             changePassword(){
                 this.$emit('change-password', this.password);
             },
+            resetPassword(){
+                console.log(this.email)
+                this.$emit('reset-password', this.email);
+            },
             changePwFlag(){
                 this.$emit('changePwFlag');
+            },
+            resetPwFlag(){
+                this.$emit('resetPwFlag');
             },
             buttonEvent(){
                 this.changePassword();
                 this.changePwFlag();
+            },
+            resetPasswordEvent(){
+                this.resetPassword();
+                this.resetPwFlag();
             }
         },
         data(){
@@ -36,11 +47,12 @@ import './main.css';
                 password: "",
             }
         },
-        emits:['signup-info', 'user-logout', 'user-login', 'change-password', 'changePwFlag'],
+        emits:['signup-info', 'user-logout', 'user-login', 'change-password', 'changePwFlag', 'resetPwFlag','reset-password'],
         props:{
             isSignedIn: Boolean,
             getMailAddress: String,
-            changeFlag: Boolean
+            changeFlag: Boolean,
+            resetFlag: Boolean
         },
         computed: {
             email() {
@@ -68,6 +80,21 @@ import './main.css';
             <button @click="logout" class="buttons2">Log out</button>
         </div>
 
+        <div v-if="!this.isSignedIn">
+            <button @click="signup" class="buttons2">Sign up</button>
+        </div>
+
+
+        <div v-if="!this.isSignedIn">
+            <button @click="resetPwFlag" class="buttons2">Forgot password?</button>
+        </div>
+        <div v-if="!this.isSignedIn && this.resetFlag">
+            <input type="text" @change="mailChange" placeholder="Enter E-mail" />
+        </div>
+        <div v-if="!this.isSignedIn && this.resetFlag">
+            <button @click="resetPasswordEvent" class="buttons2">Send link</button>
+        </div>
+
 
         <div v-if="this.isSignedIn">
             <button @click="changePwFlag" class="buttons2">Change password</button>
@@ -81,8 +108,6 @@ import './main.css';
         <div v-if="this.isSignedIn && this.changeFlag">
             <button @click="changePwFlag" class="buttons2">Cancel</button>
         </div>
-        <div v-if="!this.isSignedIn">
-            <button @click="signup" class="buttons2">Sign up</button>
-        </div>
+        
     </div>
 </template>

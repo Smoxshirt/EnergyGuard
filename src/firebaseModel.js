@@ -14,6 +14,7 @@ import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,upda
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
+const auth2 = getAuth();
 
 const REF="EnergyGuard";
 
@@ -60,6 +61,12 @@ function signOutUser(callback) {
 function changePassword(newPassword, callback){
     updatePassword(auth.currentUser, newPassword).then(callback).catch(errorCallback);
 }
+
+function resetPassword(email, callback){
+    console.log(email)
+    sendPasswordResetEmail(auth2, email).then(callback).catch(errorCallback);
+}
+
 /*
 export const passwordReset = async (email: string) => {
     return await sendPasswordResetEmail(auth, email)
@@ -73,6 +80,7 @@ export const passwordReset = async (email: string) => {
     return await confirmPasswordReset(auth, oobCode, newPassword)
   }
 */
+
 /*
 function payloadACB(payload){ //with observer change, changes info on firebase
     //add date? add device? 
@@ -174,4 +182,4 @@ function writeUserData(path, data) {
   }
 
 
-export { createNewUser, signInUser, signOutUser, writeUserData, readUserData,changePassword, testFunction, isLoggedIn, getEmail, observeAuth };
+export { createNewUser, signInUser, signOutUser, writeUserData, readUserData,changePassword, testFunction, isLoggedIn, getEmail, observeAuth, resetPassword };
