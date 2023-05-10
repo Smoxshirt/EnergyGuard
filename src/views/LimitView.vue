@@ -19,9 +19,6 @@ export default {
             if(limit < 0) {
                 console.log("Can not set negative limit");
             }
-            else if(limit === 0) {
-                console.log("send remove limit to firebase");
-            }
             else {
                 console.log(limit);
 
