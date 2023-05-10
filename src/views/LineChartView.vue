@@ -22,6 +22,16 @@
         },
         methods: {
             getGraph(){
+                    for (let i = 0; i < this.labelArray.length; i++){
+                        var dateObj = new Date(this.labelArray[i]);
+                        var dateString = dateObj.getFullYear() + "/" + 
+                        (dateObj.getMonth() + 1) + "/" + 
+                        dateObj.getDate() + " " + 
+                        dateObj.getHours() + ":" + 
+                        dateObj.getMinutes() + ":" + 
+                        dateObj.getSeconds();
+                        this.labelArray[i] = dateString;
+                    }
                     const chartConfig = {
                         type: 'line',
                         data: {

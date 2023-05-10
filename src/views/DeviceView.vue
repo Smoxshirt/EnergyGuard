@@ -4,17 +4,25 @@ import './main.css';
 import './mobile.css';
 import TimerView from './TimerView.vue';
 import LimitView from './LimitView.vue';
-import { writeUserData, readUserData } from "../firebaseModel.js"
+import { writeUserData, readUserData, setUserData } from "../firebaseModel.js"
 export default {
   methods: {
     toggleActive(device) {
       device.isTurnedOn = !device.isTurnedOn;
-      var path = "devicelist/value/" + (device.id - 1) + "/isTurnedOn";
+      var path = "status/" + device.index + "/isTurnedOn";
       console.log(path);
-      writeUserData(path, device.isTurnedOn);
+      setUserData(path, device.isTurnedOn);
     },
     toggleExpand(device) {
         device.expanded = !device.expanded;
+    },
+    setTimer(timestamp, index, intIndex){
+      this.model.devices[intIndex].timerEndDate = timestamp;
+      this.model.devices[intIndex].timer = true;
+      var pathA = "status/" + index + "/timerEndDate";
+      var pathB = "status/" + index + "/timer";
+      setUserData(pathA, timestamp);
+      setUserData(pathB, true);
     }
   },
   props: {
@@ -50,7 +58,7 @@ export default {
                     </button>
                 </div>  
             <div class="details" v-if="device.expanded">  
-                <TimerView :device="device" />
+                <TimerView :device="device" @set-timer="setTimer" />
                 <LimitView />
             </div>
         </div>

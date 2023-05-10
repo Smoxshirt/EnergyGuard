@@ -69,12 +69,12 @@
             updateStartTime(e){
                 //this.startTime = e.target.value;
                 const date = new Date(e.target.value);
-                this.startTime = Math.floor(date.getTime() / (24 * 60 * 60 * 1000));
+                this.startTime = Math.floor(date.getTime());
             },
             updateEndTime(e){
                 //this.endTime = e.target.value;
                 const date = new Date(e.target.value);
-                this.endTime = Math.floor(date.getTime() / (24 * 60 * 60 * 1000));
+                this.endTime = Math.floor(date.getTime());
             },
             generateGraphArrays(){
                 /* this.graphData = new Array(this.model.devices[0].periodConsumption.length);

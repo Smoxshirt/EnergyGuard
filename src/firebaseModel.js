@@ -136,7 +136,7 @@ function updateModelFromFirebase(model){
     
 }
 
-function writeUserData(path, data) {
+/* function writeUserData(path, data) {
     if(auth.currentUser){
         const db = getDatabase();
         set(ref(db, 'users/' + auth.currentUser.uid + "/" + path), {
@@ -145,13 +145,43 @@ function writeUserData(path, data) {
     } else{
         alert("You need to be logged in to add data.");
     }
+  } 
+*/
+
+  function writeUserData(path, data) {
+    if(auth.currentUser){
+        const db = getDatabase();
+        set(ref(db, 'users/' + auth.currentUser.uid + "/" + path), data);
+    } else{
+        alert("You need to be logged in to add data.");
+    }
   }
+
+  function setUserData(path, data) {
+    if(auth.currentUser){
+        const db = getDatabase();
+        set(ref(db, 'users/' + auth.currentUser.uid + "/" + path), data);
+    } else{
+        alert("You need to be logged in to add data.");
+    }
+  }
+
 
   function readUserData(path, callback){
     if(auth.currentUser){
         const db = getDatabase();
         const fullPath = ref(db, 'users/' + auth.currentUser.uid + "/" + path);
         onValue(fullPath, callback);
+    } else{
+        alert("You need to be logged in to read data.")
+    }
+  }
+
+  function readUserDataOnce(path, callback){
+    if(auth.currentUser){
+        const db = getDatabase();
+        const fullPath = ref(db, 'users/' + auth.currentUser.uid + "/" + path);
+        onValue(fullPath, callback, {onlyOnce: true});
     } else{
         alert("You need to be logged in to read data.")
     }
@@ -164,4 +194,4 @@ function writeUserData(path, data) {
   }
 
 
-export { createNewUser, signInUser, signOutUser, writeUserData, readUserData, testFunction, isLoggedIn, getEmail, observeAuth, readUserDataModel };
+export { createNewUser, signInUser, signOutUser, writeUserData, readUserData, testFunction, isLoggedIn, getEmail, observeAuth, readUserDataModel, readUserDataOnce, setUserData };

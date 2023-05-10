@@ -6,17 +6,20 @@ class EnergyModel{
 
     constructor(){
         this.observers = [];
-        this.devices = [
+        /* this.devices = [
         {id: 1, name: 'Lamp', isTurnedOn: false, expanded: false, consumption: [[8, 10002],[8, 10003],[9, 10004],[7, 10005],[10, 10006],[6, 10007],[8, 10008]], periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: [], timer: false, timerEndDate: 0},
         {id: 2, name: 'Fan', isTurnedOn: false, expanded: false, consumption: [[15, 10002],[15, 10003],[21, 10004],[22, 10005],[20, 10006],[15, 10007],[15, 10008]], periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: [], timer: false, timerEndDate: 0},
         {id: 3, name: 'TV', isTurnedOn: false, expanded: false, consumption: [[0, 10002],[0, 10003],[0, 10004],[43, 10005],[44, 10006],[44, 10007],[43, 10008]], periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: [], timer: false, timerEndDate: 0},
         {id: 4, name: 'Fridge', isTurnedOn: false, expanded: false, consumption: [[30, 10002],[29, 10003],[31, 10004],[24, 10005],[23, 10006],[24, 10007],[17, 10008]], periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: [], timer: false, timerEndDate: 0},
         {id: 5, name: 'Computer', isTurnedOn: false, expanded: false, consumption: [[20, 10002],[5, 10003],[4, 10004],[8, 10005],[7, 10006],[6, 10007],[6, 10008]], periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: [], timer: false, timerEndDate: 0}];
+        */
+        this.devices = [{id: 1, name: 'Lamp', isTurnedOn: false, expanded: false, consumption: [], 
+        periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: [], timer: false, timerEndDate: 0}];
         this.isSignedIn = false;
         this.testText = "Text from model";
         this.emailAddress = "";
-        this.startTime = 0;
-        this.endTime = 99999999;
+        this.startTime = Date.now() - 604800000;
+        this.endTime = Date.now();
         this.updatePeriodConsumption();
         this.pricePromiseState = {};
         this.waitingForUserData = true;
@@ -46,6 +49,7 @@ class EnergyModel{
                 if(this.statusSnapshot[i].isActive){
                     const device = {
                         id: this.statusSnapshot[i].id,
+                        macAddr: this.statusSnapshot[i].macAddr,
                         name: this.statusSnapshot[i].name,
                         isTurnedOn: this.statusSnapshot[i].isTurnedOn,
                         expanded: false,
@@ -55,7 +59,8 @@ class EnergyModel{
                         graphLabels: [],
                         timer: this.statusSnapshot[i].timer,
                         timerEndDate: this.statusSnapshot[i].timerEndDate,
-                        index: deviceIndex,
+                        index: i,
+                        intIndex: deviceIndex,
                         consumption: this.consumptionSnapshot[i].values
                     };
                     this.devices = [...this.devices, device];
@@ -103,12 +108,43 @@ class EnergyModel{
     }
 
     generateGraphArrays(deviceIndex){
-        this.devices[deviceIndex].graphData = new Array(this.devices[deviceIndex].periodConsumption.length);
+        const listLength = this.devices[deviceIndex].periodConsumption.length;
+
+        if(listLength > 10){
+            const chunkSize = Math.floor(listLength/10);
+            this.devices[deviceIndex].graphData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            this.devices[deviceIndex].graphLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            let counter = 0;
+            let smallIndex = 0;
+            for (let i = 0; i < listLength; i++){
+                counter++;
+                this.devices[deviceIndex].graphData[smallIndex] = this.devices[deviceIndex].graphData[smallIndex] + this.devices[deviceIndex].periodConsumption[i][0];
+                if(counter === chunkSize && smallIndex !== 9){
+                    this.devices[deviceIndex].graphLabels[smallIndex] = this.devices[deviceIndex].periodConsumption[i][1];
+                    this.devices[deviceIndex].graphData[smallIndex] = this.devices[deviceIndex].graphData[smallIndex] / counter;
+                    counter = 0;
+                    smallIndex++;
+                }else if(i === (listLength - 1)){
+                    this.devices[deviceIndex].graphLabels[smallIndex] = this.devices[deviceIndex].periodConsumption[i][1];
+                    this.devices[deviceIndex].graphData[smallIndex] = this.devices[deviceIndex].graphData[smallIndex] / counter;
+                    counter = 0;
+                }
+            }
+        }else{
+            this.devices[deviceIndex].graphData = new Array(listLength);
+            this.devices[deviceIndex].graphLabels = new Array(listLength);
+            for (let i = 0; i < listLength; i++){
+                this.devices[deviceIndex].graphData[i] = this.devices[deviceIndex].periodConsumption[i][0];
+                this.devices[deviceIndex].graphLabels[i] = this.devices[deviceIndex].periodConsumption[i][1];
+            }
+        }
+
+        /* this.devices[deviceIndex].graphData = new Array(this.devices[deviceIndex].periodConsumption.length);
         this.devices[deviceIndex].graphLabels = new Array(this.devices[deviceIndex].periodConsumption.length);
         for (let i = 0; i < this.devices[deviceIndex].periodConsumption.length; i++){
             this.devices[deviceIndex].graphData[i] = this.devices[deviceIndex].periodConsumption[i][0];
             this.devices[deviceIndex].graphLabels[i] = this.devices[deviceIndex].periodConsumption[i][1];
-        }
+        } */
     }
 
     setPeriod(start, end){

@@ -15,6 +15,7 @@ export default {
             seconds: 0,
         };
     },
+    emits:['set-timer'],
     methods: {
         getCurrentDateTime() {
             const now = new Date();
@@ -59,7 +60,7 @@ export default {
             else {
                 console.log("current time + timer " + timestamp);
             }
-
+            this.$emit('set-timer', timestamp, this.device.index, this.device.intIndex);
         },
     },
 };

@@ -1,7 +1,7 @@
 
 
 <script>
-import { observeAuth, readUserData } from "./firebaseModel.js";
+import { observeAuth, readUserData, readUserDataOnce } from "./firebaseModel.js";
 import { RouterLink, RouterView } from 'vue-router';
 import HeaderView from './views/HeaderView.vue';
 import EnergyModel from './EnergyModel.js';
@@ -36,8 +36,8 @@ export default {
             this.model.emailAddress = user.email;
             console.log("Callback FROM APP with logged in user")
             if(this.initialCallback){
-              readUserData("consumption", this.consumptionCallback.bind(this));
-              readUserData("status", this.statusCallback.bind(this));
+              readUserDataOnce("consumption", this.consumptionCallback.bind(this));
+              readUserDataOnce("status", this.statusCallback.bind(this));
               this.initialCallback = false;
             }
         }else{
@@ -48,13 +48,13 @@ export default {
     },
 
     consumptionCallback(snapshot){
-      console.log(snapshot.val().value);
-      this.model.updateDeviceConsumption(snapshot.val().value);
+      console.log(snapshot.val());
+      this.model.updateDeviceConsumption(snapshot.val());
     },
 
     statusCallback(snapshot){
-      console.log(snapshot.val().value);
-      this.model.updateDeviceStatus(snapshot.val().value)
+      console.log(snapshot.val());
+      this.model.updateDeviceStatus(snapshot.val())
     }
   }
 };
@@ -66,5 +66,5 @@ export default {
 </template>
 
 <style scoped>
-/* Add any styles specific to App.vue here */
+
 </style>

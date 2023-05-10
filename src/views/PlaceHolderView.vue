@@ -1,5 +1,5 @@
 <script>
-  import { writeUserData, readUserData, testFunction, isLoggedIn, getEmail } from "../firebaseModel.js"
+  import { writeUserData, readUserData, testFunction, isLoggedIn, getEmail, readUserDataOnce } from "../firebaseModel.js"
   import './main.css';
   export default {
     props: {
@@ -13,18 +13,14 @@
         writeUserData("testpath", this.input);
       },
       readFunction(){
-        this.readClick = true;
-        readUserData("testpath", this.readCallback.bind(this));
+        readUserDataOnce("testpath", this.readCallback.bind(this));
       },
       readCallback(snapshot){
-        if(this.readClick){
-          console.log(snapshot.val().value);
-          this.readData = snapshot.val().value;
-          this.readClick = false;
-        }
+          console.log(snapshot.val());
+          this.readData = snapshot.val();
       },
       testCallback(snapshot){
-        console.log(snapshot.val().value);
+        console.log(snapshot.val());
       },
       testCallbackB(snapshot){
         console.log(snapshot.val());
@@ -88,15 +84,15 @@
       },
       updateCallback(snapshot){
         console.log(snapshot.val());
-        this.model.devices = snapshot.val().value;
+        this.model.devices = snapshot.val();
       },
       doSomething(){
         const statusObj = [
-          {id: 1, name: "Lamp", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: true},
-          {id: 2, name: "Fan", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
-          {id: 3, name: "TV", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
-          {id: 4, name: "Fridge", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
-          {id: 5, name: "Computer", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
+          {id: 1, name: "Lamp", macAddr: "none", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: true},
+          {id: 2, name: "Fan", macAddr: "none", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
+          {id: 3, name: "TV", macAddr: "none", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
+          {id: 4, name: "Fridge", macAddr: "none", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
+          {id: 5, name: "Computer", macAddr: "none", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
         ];
         const consObj = [
           {id: 1, values: [[25, 5000]]},
@@ -107,6 +103,12 @@
         ];
         writeUserData("status", statusObj);
         writeUserData("consumption", consObj);
+      },
+      doSomethingElse(){
+        readUserDataOnce("status", this.someCallback.bind(this));
+      },
+      someCallback(snapshot){
+        console.log(snapshot.val());
       }
     },
     data(){
@@ -175,6 +177,9 @@
       </div>
       <div>
         <button class="buttons2" @click="doSomething">Placeholder</button>
+      </div>
+      <div>
+        <button class="buttons2" @click="doSomethingElse">Read New</button>
       </div>
     </div>
     
