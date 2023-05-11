@@ -34,7 +34,7 @@ export default {
 <template>
     <div class="limit-view">
         <div class="limit-content">
-            <h4>Set powerlimit</h4>
+            <h4>Set powerlimit in kW/h</h4>
             <input type="number" min="0" placerholder="Set powerlimit" v-model="limit" />
             <button class="timer-button" @click="setLimit()">Set limit</button>
         </div>
