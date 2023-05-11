@@ -16,7 +16,7 @@ export default {
             seconds: 0,
         };
     },
-    emits:['set-timer'],
+    emits:['set-timer', 'cancel-timer'],
     methods: {
         getCurrentDateTime() {
             const now = new Date();
@@ -71,6 +71,9 @@ export default {
             }
             this.$emit('set-timer', timestamp, this.device.index, this.device.intIndex);
         },
+        cancelTimer(){
+            this.$emit('cancel-timer', this.device.index, this.device.intIndex);
+        }
     },
 };
 </script>
@@ -89,6 +92,7 @@ export default {
             <input class="choose-timer" type="number" min="0" placeholder="Minutes" v-model="minutes" />
             <input class="choose-timer" type="number" min="0" placeholder="Seconds" v-model="seconds" />
             <button class="timer-button" @click="setTimer()">Set timer</button>
+            <button v-if="this.device.timer" class="timer-button" @click="cancelTimer()">Cancel</button>
         </div>
     </div>
 </template>

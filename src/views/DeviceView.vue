@@ -23,6 +23,14 @@ export default {
       var pathB = "status/" + index + "/timer";
       setUserData(pathA, timestamp);
       setUserData(pathB, true);
+    },
+    cancelTimer(index, intIndex){
+      this.model.devices[intIndex].timerEndDate = 0;
+      this.model.devices[intIndex].timer = false;
+      var pathA = "status/" + index + "/timerEndDate";
+      var pathB = "status/" + index + "/timer";
+      setUserData(pathA, 0);
+      setUserData(pathB, false);
     }
   },
   props: {
@@ -58,7 +66,7 @@ export default {
                     </button>
                 </div>  
             <div class="details" v-if="device.expanded">  
-                <TimerView :device="device" @set-timer="setTimer" />
+                <TimerView :device="device" @set-timer="setTimer" @cancel-timer="cancelTimer" />
                 <LimitView :device="device" />
             </div>
         </div>
