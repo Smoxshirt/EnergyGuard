@@ -86,7 +86,7 @@
 
 
         <div v-if="!this.isSignedIn">
-            <button @click="resetPwFlag" class="buttons2">Forgot password?</button>
+            <button @click="resetPwFlag" class="buttons2-autoWidth">Forgot password?</button>
         </div>
         <div v-if="!this.isSignedIn && this.resetFlag">
             <input type="text" @change="mailChange" placeholder="Enter E-mail" />
@@ -97,7 +97,7 @@
 
 
         <div v-if="this.isSignedIn">
-            <button @click="changePwFlag" class="buttons2">Change password</button>
+            <button @click="changePwFlag" class="buttons2-autoWidth">Change password</button>
         </div>
         <div v-if="this.isSignedIn && this.changeFlag">
             <input type="password" @change="passwordChange" placeholder="New password" />
