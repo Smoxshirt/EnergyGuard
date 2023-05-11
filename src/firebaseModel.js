@@ -9,11 +9,12 @@ import EnergyModel from "./EnergyModel";
 // Instructions from Firebase.
 import {initializeApp} from "firebase/app";
 import {getDatabase, ref, set, get, onChildRemoved, onChildAdded, onValue} from "firebase/database";
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged} from "firebase/auth";
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,updatePassword, signOut, onAuthStateChanged, sendPasswordResetEmail, confirmPasswordReset} from "firebase/auth";
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
+const auth2 = getAuth();
 
 const REF="EnergyGuard";
 
@@ -56,6 +57,29 @@ function signInUser(email, password, callback){
 function signOutUser(callback) {
     signOut(getAuth()).then(callback).catch(errorCallback);
 }
+
+function changePassword(newPassword, callback){
+    updatePassword(auth.currentUser, newPassword).then(callback).catch(errorCallback);
+}
+
+function resetPassword(email, callback){
+    console.log(email)
+    sendPasswordResetEmail(auth2, email).then(callback).catch(errorCallback);
+}
+
+/*
+export const passwordReset = async (email: string) => {
+    return await sendPasswordResetEmail(auth, email)
+  }
+
+  export const confirmThePasswordReset = async (
+    oobCode:string, newPassword:string
+  ) => {
+    if(!oobCode && !newPassword) return;
+    
+    return await confirmPasswordReset(auth, oobCode, newPassword)
+  }
+*/
 
 /*
 function payloadACB(payload){ //with observer change, changes info on firebase
@@ -203,4 +227,4 @@ function updateModelFromFirebase(model){
   }
 
 
-export { setMetaData, createNewUser, signInUser, signOutUser, writeUserData, readUserData, testFunction, isLoggedIn, getEmail, observeAuth, readUserDataModel, readUserDataOnce, setUserData };
+export { setMetaData,readUserDataOnce,readUserDataModel,setUserData, createNewUser, signInUser, signOutUser, writeUserData, readUserData,changePassword, testFunction, isLoggedIn, getEmail, observeAuth, resetPassword };

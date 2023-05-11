@@ -13,7 +13,7 @@
         computed: {
             priceTitle() {
                 const date=new Date();
-                console.log(this.priceData.data[0])
+                console.log(this.priceData.data[date.getHours()])
                 return this.priceData.data[date.getHours()].SEK_per_kWh;
             }
         },
