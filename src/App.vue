@@ -28,6 +28,7 @@ export default {
     observeAuth(this.authCallback.bind(this));
   },
 
+
   methods: {
     authCallback(user){
       this.model.waitingForUserData = false;

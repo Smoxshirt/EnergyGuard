@@ -1,6 +1,6 @@
 <script>
 import LoginView from '../views/LoginView.vue'
-import { createNewUser, signInUser, signOutUser, changePassword, resetPassword } from '../firebaseModel';
+import { createNewUser, signInUser, signOutUser, changePassword, resetPassword, readUserDataOnce } from '../firebaseModel';
 export default {
     data(){
         return {
@@ -44,6 +44,8 @@ export default {
             this.model.isSignedIn = true;
             this.model.setEmail(credentials.user.email);
             console.log(credentials.user.email);
+            readUserDataOnce("consumption", this.consumptionCallback.bind(this));
+            readUserDataOnce("status", this.statusCallback.bind(this));
         },
         signOutCallback(){
             this.model.isSignedIn = false;
@@ -61,6 +63,15 @@ export default {
         resetPwFlag(){
             this.resetFlag=!this.resetFlag;
             console.log(this.resetFlag)
+        },
+        consumptionCallback(snapshot){
+            console.log(snapshot.val());
+            this.model.updateDeviceConsumption(snapshot.val());
+        },
+
+        statusCallback(snapshot){
+            console.log(snapshot.val());
+            this.model.updateDeviceStatus(snapshot.val())
         }
     },
     props: {

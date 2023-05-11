@@ -45,6 +45,7 @@ class EnergyModel{
 
     updateDeviceList(){
         if(this.statusSnapshot === null || this.consumptionSnapshot === null){
+            this.hasDevices = false;
             return;
         }
 
@@ -79,7 +80,22 @@ class EnergyModel{
             }
             this.hasDevices = true;
             this.updatePeriodConsumption();
-            listenToUserData("consumption", this.updateConsumption.bind(this))
+            listenToUserData("consumption", this.updateConsumption.bind(this));
+            listenToUserData("status", this.updateStatus.bind(this));
+        }
+    }
+
+    updateStatus(snapshot){
+        console.log("Status callback");
+        var snapVal = snapshot.val();
+        console.log(snapVal);
+        if(this.hasDevices){
+            for(let i = 0; i < this.devices.length; i++){
+                this.devices[i].isTurnedOn = snapVal[this.devices[i].index].isTurnedOn;
+                this.devices[i].name = snapVal[this.devices[i].index].name;
+                this.devices[i].timer = snapVal[this.devices[i].index].timer;
+                this.devices[i].timerEndDate = snapVal[this.devices[i].index].timerEndDate;
+            }
         }
     }
 
