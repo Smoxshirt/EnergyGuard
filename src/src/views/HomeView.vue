@@ -11,14 +11,9 @@ import './mobile.css';
         totalConsumptionArray: Array
       }
     },
-    props: ["priceData", "model"],
+    props:{
+      model: {},
 
-    computed: {
-                  priceTitle() {
-                const date=new Date();
-                console.log(this.priceData.data[date.getHours()])
-                return this.priceData.data[date.getHours()].SEK_per_kWh;
-            }
     },
     components: {
       ChartView,
@@ -32,19 +27,10 @@ import './mobile.css';
                     this.nameArray[i] = this.model.devices[i].name;
                     this.totalConsumptionArray[i] = this.model.devices[i].periodTotal;
                 }
-            },
-            getPrice() {
-              this.$emit('getPrice');
-            },
+            }
     },
     created(){
       this.generateGraphArrays();
-    },
-    beforeUpdate(){
-      this.generateGraphArrays();
-    },
-    updated(){
-      
     }
   };
 </script>

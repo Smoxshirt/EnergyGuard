@@ -1,7 +1,7 @@
 
 
 <script>
-import { observeAuth, readUserData, readUserDataOnce } from "./firebaseModel.js";
+import { observeAuth } from "./firebaseModel.js";
 import { RouterLink, RouterView } from 'vue-router';
 import HeaderView from './views/HeaderView.vue';
 import EnergyModel from './EnergyModel.js';
@@ -12,7 +12,6 @@ export default {
   data() {
     return {
       model: {},
-      initialCallback: false,
     };
   },
   components: {
@@ -24,7 +23,6 @@ export default {
   created() {
     this.model = new EnergyModel();
     this.model.updateUserStatus();
-    this.initialCallback = true;
     observeAuth(this.authCallback.bind(this));
   },
 
@@ -35,26 +33,11 @@ export default {
             this.model.isSignedIn = true;
             this.model.emailAddress = user.email;
             console.log("Callback FROM APP with logged in user")
-            if(this.initialCallback){
-              readUserDataOnce("consumption", this.consumptionCallback.bind(this));
-              readUserDataOnce("status", this.statusCallback.bind(this));
-              this.initialCallback = false;
-            }
         }else{
             this.model.isSignedIn = false;
             this.model.emailAddress = "";
             console.log("Callback FROM APP WITHOUT logged in user")
         }
-    },
-
-    consumptionCallback(snapshot){
-      console.log(snapshot.val());
-      this.model.updateDeviceConsumption(snapshot.val());
-    },
-
-    statusCallback(snapshot){
-      console.log(snapshot.val());
-      this.model.updateDeviceStatus(snapshot.val())
     }
   }
 };
@@ -66,5 +49,5 @@ export default {
 </template>
 
 <style scoped>
-
+/* Add any styles specific to App.vue here */
 </style>

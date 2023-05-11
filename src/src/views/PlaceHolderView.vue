@@ -1,5 +1,5 @@
 <script>
-  import { writeUserData, readUserData, testFunction, isLoggedIn, getEmail, readUserDataOnce } from "../firebaseModel.js"
+  import { writeUserData, readUserData, testFunction, isLoggedIn, getEmail } from "../firebaseModel.js"
   import './main.css';
   export default {
     props: {
@@ -13,14 +13,18 @@
         writeUserData("testpath", this.input);
       },
       readFunction(){
-        readUserDataOnce("testpath", this.readCallback.bind(this));
+        this.readClick = true;
+        readUserData("testpath", this.readCallback.bind(this));
       },
       readCallback(snapshot){
-          console.log(snapshot.val());
-          this.readData = snapshot.val();
+        if(this.readClick){
+          console.log(snapshot.val().value);
+          this.readData = snapshot.val().value;
+          this.readClick = false;
+        }
       },
       testCallback(snapshot){
-        console.log(snapshot.val());
+        console.log(snapshot.val().value);
       },
       testCallbackB(snapshot){
         console.log(snapshot.val());
@@ -84,31 +88,12 @@
       },
       updateCallback(snapshot){
         console.log(snapshot.val());
-        this.model.devices = snapshot.val();
+        this.model.devices = snapshot.val().value;
       },
       doSomething(){
-        const statusObj = [
-          {id: 1, name: "Lamp", macAddr: "none", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: true},
-          {id: 2, name: "Fan", macAddr: "none", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
-          {id: 3, name: "TV", macAddr: "none", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
-          {id: 4, name: "Fridge", macAddr: "none", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
-          {id: 5, name: "Computer", macAddr: "none", isTurnedOn: false, timer: false, timerEndDate: 0, consumptionIndex: 1, isActive: false},
-        ];
-        const consObj = [
-          {id: 1, values: [[25, 5000]]},
-          {id: 2, values: [[25, 5000]]},
-          {id: 3, values: [[25, 5000]]},
-          {id: 4, values: [[25, 5000]]},
-          {id: 5, values: [[25, 5000]]},
-        ];
-        writeUserData("status", statusObj);
-        writeUserData("consumption", consObj);
-      },
-      doSomethingElse(){
-        readUserDataOnce("status", this.someCallback.bind(this));
-      },
-      someCallback(snapshot){
-        console.log(snapshot.val());
+        testFunction();
+        this.model.updateUserStatus();
+
       }
     },
     data(){
@@ -177,9 +162,6 @@
       </div>
       <div>
         <button class="buttons2" @click="doSomething">Placeholder</button>
-      </div>
-      <div>
-        <button class="buttons2" @click="doSomethingElse">Read New</button>
       </div>
     </div>
     
