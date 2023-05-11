@@ -87,9 +87,6 @@
                     this.graphData[i] = this.model.devices[0].periodConsumption[i][0];
                     this.graphLabels[i] = this.model.devices[0].periodConsumption[i][1];
                 } */
-                if(this.model.hasDevices === false){
-                    return;
-                }
                 this.graphArray = new Array(this.model.devices.length);
                 this.nameArray = new Array(this.model.devices.length);
                 this.totalConsumptionArray = new Array(this.model.devices.length);
@@ -153,7 +150,7 @@
     </div>
 
     <div class="chart-container">
-    <div v-if="this.model.hasDevices" class="charts">
+    <div class="charts">
         <LineChartView v-if="this.displayLine"
         :dataArray="this.graphArray" 
         :labelArray="this.model.devices[0].graphLabels"
@@ -182,8 +179,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
 
 </template>

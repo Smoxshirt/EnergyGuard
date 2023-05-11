@@ -7,6 +7,8 @@ import DetailsPresenter from '../presenters/DetailsPresenter.vue'
 import DeviceView from '../views/DeviceView.vue'
 import GraphView from '../views/GraphView.vue'
 import GraphPresenter from '../presenters/GraphPresenter.vue'
+import PricePresenter from '../presenters/PricePresenter.vue'
+import HomePresenter from '../presenters/HomePresenter.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,13 +17,13 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       props: true,
-      component: HomeView
+      component: HomePresenter
     },
     {
-      path: '/overview',
-      name: 'Overview',
+      path: '/prices',
+      name: 'Prices',
       props: true,
-      component: GraphPresenter
+      component: PricePresenter
     },
     {
       path: '/placeholder',
