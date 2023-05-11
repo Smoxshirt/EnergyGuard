@@ -29,8 +29,8 @@ export default {
       this.model.devices[intIndex].timer = false;
       var pathA = "status/" + index + "/timerEndDate";
       var pathB = "status/" + index + "/timer";
-      setUserData(pathA, 0);
       setUserData(pathB, false);
+      setUserData(pathA, 0);
     }
   },
   props: {
