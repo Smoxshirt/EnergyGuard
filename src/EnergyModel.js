@@ -1,4 +1,4 @@
-import { writeUserData, isLoggedIn, getEmail, readUserDataModel } from "./firebaseModel.js";
+import { writeUserData, isLoggedIn, getEmail, readUserDataModel, listenToUserData } from "./firebaseModel.js";
 import { getCurrentPrice } from "./priceSource.js";
 import { resolvePromise } from "./resolvePromise.js";
 
@@ -80,9 +80,19 @@ class EnergyModel{
             }
             this.hasDevices = true;
             this.updatePeriodConsumption();
+            listenToUserData("consumption", this.updateConsumption.bind(this))
         }
     }
 
+    updateConsumption(snapshot){
+        console.log("Listen callback");
+        console.log(snapshot.val());
+        if(this.hasDevices){
+            for(let i = 0; i < this.devices.length; i++){
+                this.devices[i].consumption = snapshot.val()[this.devices[i].index].values;
+            }
+        }
+    }
 
 
     updateUserStatus(){

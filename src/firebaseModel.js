@@ -210,6 +210,16 @@ function updateModelFromFirebase(model){
     }
   }
 
+  function listenToUserData(path, callback){
+    if(auth.currentUser){
+        const db = getDatabase();
+        const fullPath = ref(db, 'users/' + auth.currentUser.uid + "/" + path);
+        onValue(fullPath, callback);
+    } else{
+        alert("You need to be logged in to read data.")
+    }
+  }
+
   function readUserDataOnce(path, callback){
     if(auth.currentUser){
         const db = getDatabase();
@@ -227,4 +237,4 @@ function updateModelFromFirebase(model){
   }
 
 
-export { setMetaData,readUserDataOnce,readUserDataModel,setUserData, createNewUser, signInUser, signOutUser, writeUserData, readUserData,changePassword, testFunction, isLoggedIn, getEmail, observeAuth, resetPassword };
+export { listenToUserData, setMetaData, readUserDataOnce, readUserDataModel, setUserData, createNewUser, signInUser, signOutUser, writeUserData, readUserData,changePassword, testFunction, isLoggedIn, getEmail, observeAuth, resetPassword };
