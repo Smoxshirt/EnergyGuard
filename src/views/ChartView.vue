@@ -8,9 +8,18 @@ export default {
     components: {
         PieChartView
     },
-    props: {
-        dataArray: Array,
-        nameArray: Array
+    props: ["dataArray", "nameArray", "priceData", "model"],
+    computed: {
+            priceTitle() {
+                const date=new Date();
+                console.log(this.priceData.data[date.getHours()])
+                return this.priceData.data[date.getHours()].SEK_per_kWh;
+            }
+        },
+    methods: {
+        getPrice(){
+                this.$emit('getPrice')
+            }
     }
 };
 </script>
@@ -22,5 +31,6 @@ export default {
         <PieChartView 
         :dataArray="this.dataArray"
         :nameArray="this.nameArray"/>
+        <h3>Current electricity price: {{ priceTitle }} kr/KWh</h3>
     </div>
 </template>

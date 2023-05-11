@@ -1,8 +1,10 @@
 <script>
-import DeviceView from './DeviceView.vue';
-import ChartView from './ChartView.vue';
-import './main.css';
-import './mobile.css';
+import DeviceView from '../views/DeviceView.vue';
+import ChartView from '../views/ChartView.vue';
+import { getCurrentPrice } from '../priceSource';
+import { resolvePromise } from '../resolvePromise';
+import '../views/main.css';
+import '../views/mobile.css';
 
   export default {
     data(){
@@ -14,11 +16,12 @@ import './mobile.css';
     props: ["priceData", "model"],
 
     computed: {
-                  priceTitle() {
-                const date=new Date();
-                console.log(this.priceData.data[date.getHours()])
-                return this.priceData.data[date.getHours()].SEK_per_kWh;
-            }
+            priceData(){
+                if (this.model.pricePromiseState.data == null) {
+                    this.model.pricePromiseState.data = { price: "Waiting for a price..." };
+                }
+                return this.model.pricePromiseState;
+            },
     },
     components: {
       ChartView,
@@ -33,12 +36,14 @@ import './mobile.css';
                     this.totalConsumptionArray[i] = this.model.devices[i].periodTotal;
                 }
             },
-            getPrice() {
-              this.$emit('getPrice');
-            },
+            getPrice(){
+                this.model.getCurrentEnergyPrice();
+            }
     },
     created(){
       this.generateGraphArrays();
+      if (this.model.pricePromiseState.promise == undefined)
+                resolvePromise(getCurrentPrice(), this.model.pricePromiseState);
     },
     beforeUpdate(){
       this.generateGraphArrays();
@@ -72,7 +77,9 @@ import './mobile.css';
     <div class="home-view" v-if="this.model.isSignedIn">
       <ChartView 
       :dataArray="this.totalConsumptionArray"
-      :nameArray="this.nameArray"/>
+      :nameArray="this.nameArray"
+      :priceData="priceData"
+      @getPrice="getPrice"/>
       <DeviceView :model="this.model"/>
     </div>
   </main>

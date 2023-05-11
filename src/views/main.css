@@ -314,6 +314,7 @@ canvas {
     height: auto;
     padding: 20px;
     margin-bottom: 20px;
+    margin-top: 42px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -348,4 +349,8 @@ canvas {
 
 .timer-content {
     margin-bottom: 30px;
+}
+
+.details-price {
+    
 }
