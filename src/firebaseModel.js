@@ -166,6 +166,15 @@ function updateModelFromFirebase(model){
     }
   }
 
+  function setMetaData(id) {
+    if(auth.currentUser){
+        const db = getDatabase();
+        set(ref(db, 'hubID/' + id), auth.currentUser.uid);
+    } else{
+        alert("You need to be logged in to add data.");
+    }
+  }
+
 
   function readUserData(path, callback){
     if(auth.currentUser){
@@ -194,4 +203,4 @@ function updateModelFromFirebase(model){
   }
 
 
-export { createNewUser, signInUser, signOutUser, writeUserData, readUserData, testFunction, isLoggedIn, getEmail, observeAuth, readUserDataModel, readUserDataOnce, setUserData };
+export { setMetaData, createNewUser, signInUser, signOutUser, writeUserData, readUserData, testFunction, isLoggedIn, getEmail, observeAuth, readUserDataModel, readUserDataOnce, setUserData };
