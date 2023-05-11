@@ -35,13 +35,16 @@ export default {
             this.model.isSignedIn = true;
             this.model.emailAddress = user.email;
             console.log("Callback FROM APP with logged in user")
-            if(this.initialCallback){
+            /* if(this.initialCallback){
               readUserDataOnce("consumption", this.consumptionCallback.bind(this));
               readUserDataOnce("status", this.statusCallback.bind(this));
               this.initialCallback = false;
-            }
+            } */
+            readUserDataOnce("consumption", this.consumptionCallback.bind(this));
+            readUserDataOnce("status", this.statusCallback.bind(this));
         }else{
             this.model.isSignedIn = false;
+            this.model.hasDevices = false;
             this.model.emailAddress = "";
             console.log("Callback FROM APP WITHOUT logged in user")
         }

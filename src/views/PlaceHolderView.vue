@@ -1,5 +1,5 @@
 <script>
-  import { writeUserData, readUserData, testFunction, isLoggedIn, getEmail, readUserDataOnce } from "../firebaseModel.js"
+  import { writeUserData, readUserData, testFunction, isLoggedIn, getEmail, readUserDataOnce, setMetaData } from "../firebaseModel.js"
   import './main.css';
   export default {
     props: {
@@ -109,14 +109,22 @@
       },
       someCallback(snapshot){
         console.log(snapshot.val());
+      },
+      setUID(){
+        setMetaData(this.hubID);
+      },
+      hubIdChange(e){
+        this.hubID = e.target.value;
       }
+
     },
     data(){
       return {
         input: "",
         readData: "",
         readClick: false,
-        customPath: ""
+        customPath: "",
+        hubID: "",
       }
     }
   }
@@ -181,7 +189,14 @@
       <div>
         <button class="buttons2" @click="doSomethingElse">Read New</button>
       </div>
+      <div>
+        <input type="text" @change="hubIdChange" placeholder="HUB ID" />
+      </div>
+      <div>
+        <button class="buttons2" @click="setUID">Set UID</button>
+      </div>
     </div>
+
     
     
 </template>

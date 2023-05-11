@@ -26,6 +26,9 @@ import './mobile.css';
     },
     methods: {
       generateGraphArrays(){
+                if(this.model.hasDevices === false){
+                  return;
+                }
                 this.nameArray = new Array(this.model.devices.length);
                 this.totalConsumptionArray = new Array(this.model.devices.length);
                 for (let i = 0; i < this.model.devices.length; i++){
@@ -68,8 +71,10 @@ import './mobile.css';
     </div>
     </div>
 
-
-    <div class="home-view" v-if="this.model.isSignedIn">
+    <div class="welcome-container" v-if="!this.model.hasDevices && !this.model.waitingForUserData && this.model.isSignedIn">
+      <p class="p-welcome">No devices connected to the hub. Connect a device to display here.</p>
+    </div>
+    <div class="home-view" v-if="this.model.isSignedIn && this.model.hasDevices">
       <ChartView 
       :dataArray="this.totalConsumptionArray"
       :nameArray="this.nameArray"/>
