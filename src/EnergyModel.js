@@ -1,4 +1,4 @@
-import { writeUserData, isLoggedIn, getEmail, readUserDataModel } from "./firebaseModel.js";
+import { writeUserData, isLoggedIn, getEmail, readUserDataModel, listenToUserData } from "./firebaseModel.js";
 import { getCurrentPrice } from "./priceSource.js";
 import { resolvePromise } from "./resolvePromise.js";
 
@@ -13,8 +13,9 @@ class EnergyModel{
         {id: 4, name: 'Fridge', isTurnedOn: false, expanded: false, consumption: [[30, 10002],[29, 10003],[31, 10004],[24, 10005],[23, 10006],[24, 10007],[17, 10008]], periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: [], timer: false, timerEndDate: 0},
         {id: 5, name: 'Computer', isTurnedOn: false, expanded: false, consumption: [[20, 10002],[5, 10003],[4, 10004],[8, 10005],[7, 10006],[6, 10007],[6, 10008]], periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: [], timer: false, timerEndDate: 0}];
         */
-        this.devices = [{id: 1, name: 'Lamp', isTurnedOn: false, expanded: false, consumption: [], 
-        periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: [], timer: false, timerEndDate: 0}];
+        // this.devices = [{id: 1, name: 'Lamp', isTurnedOn: false, expanded: false, consumption: [], 
+        // periodConsumption: [], periodTotal: 0, graphData: [], graphLabels: [], timer: false, timerEndDate: 0}];
+        this.devices = null;
         this.isSignedIn = false;
         this.testText = "Text from model";
         this.emailAddress = "";
@@ -27,6 +28,7 @@ class EnergyModel{
         this.statusReady = false;
         this.consumptionSnapshot = [];
         this.consumptionReady = false;
+        this.hasDevices = false;
     }
 
     updateDeviceStatus(status){
@@ -42,10 +44,18 @@ class EnergyModel{
     }
 
     updateDeviceList(){
+        if(this.statusSnapshot === null || this.consumptionSnapshot === null){
+            return;
+        }
+
         if(this.statusReady && this.consumptionReady){
             this.devices = [];
             let deviceIndex = 0;
-            for (let i = 0; i < this.statusSnapshot.length; i++){
+            var statusLength = 0;
+            if(this.statusSnapshot !== null){
+                statusLength = this.statusSnapshot.length;
+            }
+            for (let i = 0; i < statusLength; i++){
                 if(this.statusSnapshot[i].isActive){
                     const device = {
                         id: this.statusSnapshot[i].id,
@@ -67,10 +77,21 @@ class EnergyModel{
                     deviceIndex++;
                 }
             }
+            this.hasDevices = true;
             this.updatePeriodConsumption();
+            listenToUserData("consumption", this.updateConsumption.bind(this))
         }
     }
 
+    updateConsumption(snapshot){
+        console.log("Listen callback");
+        console.log(snapshot.val());
+        if(this.hasDevices){
+            for(let i = 0; i < this.devices.length; i++){
+                this.devices[i].consumption = snapshot.val()[this.devices[i].index].values;
+            }
+        }
+    }
 
 
     updateUserStatus(){
@@ -94,6 +115,9 @@ class EnergyModel{
     }
 
     updatePeriodConsumption(){
+        if(this.devices === null){
+            return;
+        }
         for (let i = 0; i < this.devices.length; i++){
             console.log(this.devices[i].id)
             this.devices[i].periodConsumption = this.devices[i].consumption.filter(this.periodCheck.bind(this));
