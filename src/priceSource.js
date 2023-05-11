@@ -10,20 +10,11 @@ function getCurrentPrice(){
     const date = new Date();
     const year = date.getFullYear().toString();
     const hours = date.getHours().toString();
-    let month="01";
-    let day="01";
+    const month=(date.getMonth()+1).toString().padStart(2, '0');
+    const day=date.getDate().toString().padStart(2, '0');
 
-    if(date.getMonth()<10){
-         month="0"+date.getMonth().toString()
-    } else {
-         month=date.getMonth().toString()
-    }
 
-    if(date.getDay()<10){
-         day="0"+date.getDay().toString()
-    } else {
-         day=date.getDay().toString()
-    }
+    console.log(year+" "+month+" "+ day);
 
     
     return fetch("https://www.elprisetjustnu.se/api/v1/prices/"
