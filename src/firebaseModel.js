@@ -218,4 +218,4 @@ function updateModelFromFirebase(model){
   }
 
 
-export { createNewUser, signInUser, signOutUser, writeUserData, readUserData,changePassword, testFunction, isLoggedIn, getEmail, observeAuth, resetPassword };
+export {readUserDataOnce,readUserDataModel,setUserData, createNewUser, signInUser, signOutUser, writeUserData, readUserData,changePassword, testFunction, isLoggedIn, getEmail, observeAuth, resetPassword };
