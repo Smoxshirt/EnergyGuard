@@ -21,17 +21,30 @@
             updateGraph(){
             console.log("Updated");
             const newList = [
-                {x:22, y:7},
-                {x:80, y:8},
-                {x:70, y:8},
-                {x:40, y:9},
-                {x:90, y:9},
-                {x:100, y:9},
-                {x:22, y:10},
-                {x:120, y:11},
-                {x:10, y:14},
-                {x:140, y:14},
-                {x:150, y:15}
+                {x:0, y:this.priceData.data[0].SEK_per_kWh},
+                {x:1, y:this.priceData.data[1].SEK_per_kWh},
+                {x:2, y:this.priceData.data[2].SEK_per_kWh},
+                {x:3, y:this.priceData.data[3].SEK_per_kWh},
+                {x:4, y:this.priceData.data[4].SEK_per_kWh},
+                {x:5, y:this.priceData.data[5].SEK_per_kWh},
+                {x:6, y:this.priceData.data[6].SEK_per_kWh},
+                {x:7, y:this.priceData.data[7].SEK_per_kWh},
+                {x:8, y:this.priceData.data[8].SEK_per_kWh},
+                {x:9, y:this.priceData.data[9].SEK_per_kWh},
+                {x:10, y:this.priceData.data[10].SEK_per_kWh},
+                {x:11, y:this.priceData.data[11].SEK_per_kWh},
+                {x:12, y:this.priceData.data[12].SEK_per_kWh},
+                {x:13, y:this.priceData.data[13].SEK_per_kWh},
+                {x:14, y:this.priceData.data[14].SEK_per_kWh},
+                {x:15, y:this.priceData.data[15].SEK_per_kWh},
+                {x:16, y:this.priceData.data[16].SEK_per_kWh},
+                {x:17, y:this.priceData.data[17].SEK_per_kWh},
+                {x:18, y:this.priceData.data[18].SEK_per_kWh},
+                {x:19, y:this.priceData.data[19].SEK_per_kWh},
+                {x:20, y:this.priceData.data[20].SEK_per_kWh},
+                {x:21, y:this.priceData.data[21].SEK_per_kWh},
+                {x:22, y:this.priceData.data[22].SEK_per_kWh},
+                {x:23, y:this.priceData.data[23].SEK_per_kWh}
             ];
             this.myChart = new Chart("myChart", {
             type: "scatter",
@@ -56,17 +69,30 @@
         mounted(){
             // const ctx = document.getElementById('myChart');
             const dataList = [
-                {x:50, y:7},
-                {x:60, y:8},
-                {x:70, y:8},
-                {x:80, y:9},
-                {x:90, y:9},
-                {x:100, y:9},
-                {x:110, y:10},
-                {x:120, y:11},
-                {x:130, y:14},
-                {x:140, y:14},
-                {x:150, y:15}
+                {x:0, y:this.priceData.data[0].SEK_per_kWh},
+                {x:1, y:this.priceData.data[1].SEK_per_kWh},
+                {x:2, y:this.priceData.data[2].SEK_per_kWh},
+                {x:3, y:this.priceData.data[3].SEK_per_kWh},
+                {x:4, y:this.priceData.data[4].SEK_per_kWh},
+                {x:5, y:this.priceData.data[5].SEK_per_kWh},
+                {x:6, y:this.priceData.data[6].SEK_per_kWh},
+                {x:7, y:this.priceData.data[7].SEK_per_kWh},
+                {x:8, y:this.priceData.data[8].SEK_per_kWh},
+                {x:9, y:this.priceData.data[9].SEK_per_kWh},
+                {x:10, y:this.priceData.data[10].SEK_per_kWh},
+                {x:11, y:this.priceData.data[11].SEK_per_kWh},
+                {x:12, y:this.priceData.data[12].SEK_per_kWh},
+                {x:13, y:this.priceData.data[13].SEK_per_kWh},
+                {x:14, y:this.priceData.data[14].SEK_per_kWh},
+                {x:15, y:this.priceData.data[15].SEK_per_kWh},
+                {x:16, y:this.priceData.data[16].SEK_per_kWh},
+                {x:17, y:this.priceData.data[17].SEK_per_kWh},
+                {x:18, y:this.priceData.data[18].SEK_per_kWh},
+                {x:19, y:this.priceData.data[19].SEK_per_kWh},
+                {x:20, y:this.priceData.data[20].SEK_per_kWh},
+                {x:21, y:this.priceData.data[21].SEK_per_kWh},
+                {x:22, y:this.priceData.data[22].SEK_per_kWh},
+                {x:23, y:this.priceData.data[23].SEK_per_kWh}
             ];
             this.myChart = new Chart("myChart", {
             type: "scatter",
@@ -101,7 +127,7 @@
         <div>
             <canvas id="myChart" class="canvas"></canvas>
         </div>
-        Here be graphs (soon).
+        
         <div>
             <button class="buttons2-autoWidth" @click="updateGraph">Update graph</button>
         </div>

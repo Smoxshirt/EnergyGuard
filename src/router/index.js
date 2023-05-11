@@ -5,8 +5,6 @@ import PlaceHolderView from '../views/PlaceHolderView.vue'
 import LoginPresenter from '../presenters/LoginPresenter.vue'
 import DetailsPresenter from '../presenters/DetailsPresenter.vue'
 import DeviceView from '../views/DeviceView.vue'
-import GraphView from '../views/GraphView.vue'
-import GraphPresenter from '../presenters/GraphPresenter.vue'
 import PricePresenter from '../presenters/PricePresenter.vue'
 import HomePresenter from '../presenters/HomePresenter.vue'
 
