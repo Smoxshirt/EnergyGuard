@@ -34,8 +34,8 @@
                 <h4>
                     <RouterLink to="/" class="dropdown-buttons-top">Home</RouterLink> 
                     <RouterLink to="/prices" class="dropdown-buttons">Electricity price</RouterLink>
-                    <RouterLink to="/placeholder" class="dropdown-buttons">Buttons</RouterLink>
                     <RouterLink to="/details" class="dropdown-buttons">Details</RouterLink>
+                    <RouterLink to="/realtime" class="dropdown-buttons">Realtime Graph</RouterLink>
                 </h4>
             </div>
         </div>

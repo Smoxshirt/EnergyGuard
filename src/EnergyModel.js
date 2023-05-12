@@ -1,4 +1,4 @@
-import { writeUserData, isLoggedIn, getEmail, readUserDataModel, listenToUserData } from "./firebaseModel.js";
+import { writeUserData, isLoggedIn, getEmail, readUserDataModel, listenToUserData, readUserDataOnce } from "./firebaseModel.js";
 import { getCurrentPrice } from "./priceSource.js";
 import { resolvePromise } from "./resolvePromise.js";
 
@@ -29,6 +29,8 @@ class EnergyModel{
         this.consumptionSnapshot = [];
         this.consumptionReady = false;
         this.hasDevices = false;
+        this.reBuildInProgress = false;
+        this.isListening = false;
     }
 
     updateDeviceStatus(status){
@@ -78,23 +80,64 @@ class EnergyModel{
                     deviceIndex++;
                 }
             }
-            this.hasDevices = true;
+            if(this.devices.length === 0){
+                this.hasDevices = false;
+            }else{
+                this.hasDevices = true;
+            }
             this.updatePeriodConsumption();
-            listenToUserData("consumption", this.updateConsumption.bind(this));
-            listenToUserData("status", this.updateStatus.bind(this));
+            if(!this.isListening){
+                listenToUserData("consumption", this.updateConsumption.bind(this));
+                listenToUserData("status", this.updateStatus.bind(this));
+                this.isListening = true;
+            }
+
+            this.reBuildInProgress = false;
         }
+    }
+
+    oneTimeConsumptionCallback(snapshot){
+        this.updateDeviceConsumption(snapshot.val());
+    }
+
+    oneTimeStatusCallback(snapshot){
+        this.updateDeviceStatus(snapshot.val())
     }
 
     updateStatus(snapshot){
         console.log("Status callback");
         var snapVal = snapshot.val();
         console.log(snapVal);
+
+        var deviceCount = 0;
+        for(let i = 0; i < snapVal.length; i++){
+            if(snapVal[i].isActive === true){
+                deviceCount++;
+            }
+        }
+        
         if(this.hasDevices){
-            for(let i = 0; i < this.devices.length; i++){
-                this.devices[i].isTurnedOn = snapVal[this.devices[i].index].isTurnedOn;
-                this.devices[i].name = snapVal[this.devices[i].index].name;
-                this.devices[i].timer = snapVal[this.devices[i].index].timer;
-                this.devices[i].timerEndDate = snapVal[this.devices[i].index].timerEndDate;
+            
+            if(deviceCount === this.devices.length){
+                for(let i = 0; i < this.devices.length; i++){
+                    this.devices[i].isTurnedOn = snapVal[this.devices[i].index].isTurnedOn;
+                    this.devices[i].name = snapVal[this.devices[i].index].name;
+                    this.devices[i].timer = snapVal[this.devices[i].index].timer;
+                    this.devices[i].timerEndDate = snapVal[this.devices[i].index].timerEndDate;
+                }
+            }else{
+                if(!this.reBuildInProgress){
+                    this.reBuildInProgress = true;
+                    readUserDataOnce("consumption", this.oneTimeConsumptionCallback.bind(this));
+                    readUserDataOnce("status", this.oneTimeStatusCallback.bind(this));
+                }
+            }
+
+
+        }else{
+            if(deviceCount > 0){
+                readUserDataOnce("consumption", this.oneTimeConsumptionCallback.bind(this));
+                readUserDataOnce("status", this.oneTimeStatusCallback.bind(this));
             }
         }
     }

@@ -6,6 +6,7 @@ import LoginPresenter from '../presenters/LoginPresenter.vue'
 import DetailsPresenter from '../presenters/DetailsPresenter.vue'
 import DeviceView from '../views/DeviceView.vue'
 import PricePresenter from '../presenters/PricePresenter.vue'
+import RealTimePresenter from '../presenters/RealTimePresenter.vue'
 import HomePresenter from '../presenters/HomePresenter.vue'
 
 const router = createRouter({
@@ -24,12 +25,6 @@ const router = createRouter({
       component: PricePresenter
     },
     {
-      path: '/placeholder',
-      name: 'Placeholder',
-      props: true,
-      component: PlaceHolderView
-    },
-    {
       path: '/login',
       name: 'Login',
       props: true,
@@ -46,6 +41,12 @@ const router = createRouter({
       name: 'Details',
       props: true,
       component: DetailsPresenter
+    },
+    {
+      path: '/realtime',
+      name: 'Realtime Graph',
+      props: true,
+      component: RealTimePresenter
     }
   ]
 })
