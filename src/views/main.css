@@ -13,6 +13,9 @@ h1, h2, h3, h4, h5, h6, p {
     font-family: Arial;
 }
 
+.align-center {
+    align-items: center;
+}
 
 
 .white-text {
@@ -353,4 +356,14 @@ canvas {
 
 .details-price {
     
+}
+
+.realtime-energy {
+    margin: auto;
+    display: flex;
+    width: max-content;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

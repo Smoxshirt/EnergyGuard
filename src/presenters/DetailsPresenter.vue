@@ -137,6 +137,7 @@
     </div>
 
     <div class="general-container" v-if="this.model.isSignedIn">
+    <h1 class="nomargin-nopadding">Consumption overview</h1> 
     <h4>Please enter start and end date for the period</h4>
     <div>
        <p>From</p> <input type="datetime-local" @change="updateStartTime" placeholder="Start" />

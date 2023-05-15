@@ -157,6 +157,7 @@
     </div>
     
     <div class="general-container" v-if="this.isSignedIn">
+        <h1 class="nomargin-nopadding">Electricity price of current day </h1> 
         <div>
             <canvas id="myChart" class="canvas"></canvas>
         </div>
