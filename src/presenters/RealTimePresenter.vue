@@ -61,7 +61,7 @@
 </script>
 
 <template>
-    <div class="general-container">
+    <div>
         <RealTimeLineGraphView v-if="this.dataReady"
         :dataArray="this.dataArray" 
         :labelArray="this.labelArray"

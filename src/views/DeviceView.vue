@@ -74,8 +74,8 @@ export default {
             <div class="device-top">
                 <div class="device-content">
                     <h3>{{ device.name }}</h3>
-                    <div v-if="device.timer">
-                      <p style="font-size: 12px">Timer: {{ device.timerCountdown }}</p>
+                    <div class="countdown" v-if="device.timer">
+                      <p style="font-size: 14px">Timer: {{ device.timerCountdown }}</p>
                     </div>
                     
                     </div>
