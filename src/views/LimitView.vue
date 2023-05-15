@@ -22,7 +22,7 @@ export default {
             else {
                 console.log(limit);
 
-                var path = "devicelist/value/" + (this.device.id - 1) + "/limit";
+                var path = "status/" + (this.device.id - 1) + "/powerLimit";
                 console.log(path);
                 writeUserData(path, limit);
             }

@@ -97,12 +97,16 @@
       </div>
     </div>
     </div>
-
-    <div class="realtime-energy" v-if="this.isSignedIn">
-        <h1 class="nomargin-nopadding">Realtime Energy Consumption</h1> 
+    
+    <div class="general-container" v-if="this.isSignedIn">
+  <div class="realtime-energy">
+        <h1 class="nomargin-nopadding">Realtime </h1> 
+        <h1 class="nomargin-nopadding">energyconsumption mW/s</h1>
         <canvas class="canvas" id="lineChart" aria-label="Test"></canvas>
     </div>
     <div style="font-size: 1px">
         {{ this.holder[0][0] }}
     </div>
+    </div>
+  
 </template>

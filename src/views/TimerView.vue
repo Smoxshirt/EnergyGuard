@@ -81,13 +81,13 @@ export default {
 <template>
     <div class="timer-view">
         <div class="timer-content">
-            <h4>Set date and time for turning off</h4>
+            <h4>Set date and time for turning on/off</h4>
             <input type="datetime-local" v-model="currentDateTime" />
             <button class="timer-button" @click="setScheduledTimer()">Set timer</button>
             <button v-if="this.device.timer" class="timer-button" @click="cancelTimer()">Cancel</button>
         </div>
         <div class="timer-content">
-            <h4>Set time until turning off</h4>
+            <h4>Set time until turning on/off</h4>
             <p>hours, minutes, seconds</p>
             <input class="choose-timer" type="number" min="0" placeholder="Hours" v-model="hours" />
             <input class="choose-timer" type="number" min="0" placeholder="Minutes" v-model="minutes" />
