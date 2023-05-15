@@ -31,6 +31,64 @@ class EnergyModel{
         this.hasDevices = false;
         this.reBuildInProgress = false;
         this.isListening = false;
+        this.setIntervalID = 0;
+    }
+
+    activateTimerCountdown(){
+        for(let i = 0; i < this.devices.length; i++){
+            if(this.devices[i].timer){
+                let diff = this.devices[i].timerEndDate - Date.now();
+                diff = Math.floor(diff/1000);
+                this.devices[i].timerCountdownValue = diff;
+                let days = Math.floor(diff/86400);
+                let hours = Math.floor((diff % 86400)/3600);
+                let minutes = Math.floor((diff % 3600)/60);
+                let seconds = Math.floor((diff % 60));
+                var countdownString;
+                if(days !== 0){
+                    countdownString = days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                }else if(hours !== 0){
+                    countdownString = hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                }else if(minutes !== 0){
+                    countdownString = minutes + " minutes, " + seconds + " seconds";
+                }else if(seconds !== 0){
+                    countdownString = seconds + " seconds";
+                }else{
+                    countdownString = "0 seconds";
+                }
+                this.devices[i].timerCountdown = countdownString;
+            }
+        }
+        this.setIntervalID = setInterval(this.updateTimerCountdown.bind(this), 1000);
+    }
+
+    updateTimerCountdown(){
+        for(let i = 0; i < this.devices.length; i++){
+            if(this.devices[i].timer){
+                this.devices[i].timerCountdownValue--;
+                let days = Math.floor(this.devices[i].timerCountdownValue/86400);
+                let hours = Math.floor((this.devices[i].timerCountdownValue % 86400)/3600);
+                let minutes = Math.floor((this.devices[i].timerCountdownValue % 3600)/60);
+                let seconds = Math.floor((this.devices[i].timerCountdownValue % 60));
+                var countdownString;
+                if(days !== 0){
+                    countdownString = days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                }else if(hours !== 0){
+                    countdownString = hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                }else if(minutes !== 0){
+                    countdownString = minutes + " minutes, " + seconds + " seconds";
+                }else if(seconds !== 0){
+                    countdownString = seconds + " seconds";
+                }else{
+                    countdownString = "0 seconds";
+                }
+                this.devices[i].timerCountdown = countdownString;
+            }
+         }
+        }
+
+    cancelTimer(){
+        clearInterval(this.setIntervalID);
     }
 
     updateDeviceStatus(status){
@@ -74,7 +132,9 @@ class EnergyModel{
                         timerEndDate: this.statusSnapshot[i].timerEndDate,
                         index: i,
                         intIndex: deviceIndex,
-                        consumption: this.consumptionSnapshot[i].values
+                        consumption: this.consumptionSnapshot[i].values,
+                        timerCountdown: "0 seconds",
+                        timerCountdownValue: 0,
                     };
                     this.devices = [...this.devices, device];
                     deviceIndex++;

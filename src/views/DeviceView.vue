@@ -31,6 +31,13 @@ export default {
       var pathB = "status/" + index + "/timer";
       setUserData(pathB, false);
       setUserData(pathA, 0);
+    },
+    startTimerCountdown(){
+      this.model.activateTimerCountdown();
+    },
+
+    endTimerCountdown(){
+      this.model.cancelTimer();
     }
   },
   props: {
@@ -48,6 +55,16 @@ export default {
 
     };
   },
+  mounted(){
+    this.startTimerCountdown();
+  },
+  unmounted(){
+    this.endTimerCountdown();
+  },
+  updated(){
+    this.endTimerCountdown();
+    this.startTimerCountdown();
+  }
 };
 </script>
 
@@ -57,7 +74,10 @@ export default {
             <div class="device-top">
                 <div class="device-content">
                     <h3>{{ device.name }}</h3>
-                    <p>Status: Timer: 0 {{ device.status }} Limit: 0 </p>
+                    <div v-if="device.timer">
+                      <p style="font-size: 12px">Timer: {{ device.timerCountdown }}</p>
+                    </div>
+                    
                     </div>
                     <button class="on-off-button" :class="[device.isTurnedOn ? 'green' : 'red']" @click="toggleActive(device)">{{ device.isTurnedOn ? 'ON' : 'OFF' }}</button>
                     <button class="expand-button" @click="toggleExpand(device)">

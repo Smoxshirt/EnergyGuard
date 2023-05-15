@@ -56,7 +56,7 @@ export default {
     statusCallback(snapshot){
       console.log(snapshot.val());
       this.model.updateDeviceStatus(snapshot.val())
-    }
+    },
   }
 };
 </script>
