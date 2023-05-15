@@ -26,7 +26,7 @@ export default {
 
 <template>
     <div class="chart-view">
-        <h1 class="h1energy">Energy consumption in kW/h</h1>
+        <h1 class="h1energy">Energy consumption in mW/s</h1>
         <h3>Last 7 days</h3>
         <PieChartView 
         :dataArray="this.dataArray"
