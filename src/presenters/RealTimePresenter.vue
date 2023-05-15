@@ -66,6 +66,7 @@
         :dataArray="this.dataArray" 
         :labelArray="this.labelArray"
         :name="this.name" 
-        :holder="this.model.devices[0].consumption" />
+        :holder="this.model.devices[0].consumption"
+        :isSignedIn=this.model.isSignedIn />
     </div>
 </template>

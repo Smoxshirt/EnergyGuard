@@ -32,6 +32,7 @@ class EnergyModel{
         this.reBuildInProgress = false;
         this.isListening = false;
         this.setIntervalID = 0;
+        this.priceZone="SE3";
     }
 
     activateTimerCountdown(){
@@ -305,6 +306,14 @@ class EnergyModel{
 
     removeDevice(){
 
+    }
+
+    updateZone(payload){
+
+    }
+
+    returnZone(){
+        return this.priceZone;
     }
 
     notifyObservers(payload){
