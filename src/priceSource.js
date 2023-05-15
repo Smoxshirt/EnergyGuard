@@ -1,12 +1,6 @@
-function treatHTTPResponseACB(response){ 
-    if(response.status == 200){
+import EnergyModel from "./EnergyModel";
 
-        return response.json();
-    }
-    throw ("Status is not 200");
-}
-
-function getCurrentPrice(){  
+function getCurrentPrice(model){  
     const date = new Date();
     const year = date.getFullYear().toString();
     const hours = date.getHours().toString();
@@ -15,10 +9,9 @@ function getCurrentPrice(){
 
 
     console.log(year+" "+month+" "+ day);
-
-    
+        
     return fetch("https://www.elprisetjustnu.se/api/v1/prices/"
-        +year+"/"+month+"-"+day+"_SE3.json", { 
+        +year+"/"+month+"-"+day+"_"+"SE3"+".json", { 
         method: "GET"       
      } 
     ).then(treatHTTPResponseACB);
@@ -30,6 +23,15 @@ function getCurrentPrice(){
     ).then(treatHTTPResponseACB);
     */
 }
+
+function treatHTTPResponseACB(response){ 
+    if(response.status == 200){
+
+        return response.json();
+    }
+    throw ("Status is not 200");
+}
+
 
 
 function lookupPrice(year, month, day){

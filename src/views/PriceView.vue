@@ -50,13 +50,29 @@
             type: "scatter",
             data: {
                 datasets: [{
+                label: 'Energy price',
                 pointRadius: 4,
                 pointBackgroundColor: "rgba(0,0,255,1)",
                 data: newList,
                 backgroundColor: "White"
                 }]
             },
-            options: {}
+            options:  {
+                scales: {
+                    yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'SEK per kWh'
+                    }
+                    }],
+                    xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Hour of the day'
+                    }
+                    }]
+                }     
+            }
             });
         },
             getPrice(){
@@ -98,12 +114,29 @@
             type: "scatter",
             data: {
                 datasets: [{
+                label: 'Energy price',
                 pointRadius: 4,
                 pointBackgroundColor: "rgba(0,0,255,1)",
                 data: dataList,
                 }]
             },
-            options: {}
+            options: {
+                scales: {
+                    yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'SEK per kWh'
+                    }
+                    }],
+                    xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Hour of the day'
+                    }
+                    }]
+                }     
+            }
+            
             });
             this.chartReady = true;
         }
@@ -132,8 +165,7 @@
             <button class="buttons2-autoWidth" @click="updateGraph">Update graph</button>
         </div>
 
-    <h3>Live price: {{ priceTitle }} kr/KWh</h3>
-    <h3 class="nomargin-nopadding">Last 24 hours: {{ priceTitle }} kr/KWh</h3>
+    <h3>Live price: {{ priceTitle }} SEK/kWh</h3>
     </div>
 
 </template>

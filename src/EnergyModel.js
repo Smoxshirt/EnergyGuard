@@ -31,6 +31,7 @@ class EnergyModel{
         this.hasDevices = false;
         this.reBuildInProgress = false;
         this.isListening = false;
+        this.priceZone="SE3"
     }
 
     updateDeviceStatus(status){
@@ -245,6 +246,14 @@ class EnergyModel{
 
     removeDevice(){
 
+    }
+
+    updateZone(payload){
+
+    }
+
+    returnZone(){
+        return this.priceZone;
     }
 
     notifyObservers(payload){
