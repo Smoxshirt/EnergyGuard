@@ -55,6 +55,10 @@
                     this.dataReady = true;
                     console.log("Generate done!");
                 }
+            },
+            updateDevice(index){
+                this.deviceIndex = index;
+                this.generateGraphArrays(this.deviceIndex);
             }
         }
     }
@@ -62,11 +66,14 @@
 
 <template>
     <div class="general-container">
-        <RealTimeLineGraphView v-if="this.dataReady"
+        <RealTimeLineGraphView v-if="this.dataReady && this.model.hasDevices"
         :dataArray="this.dataArray" 
         :labelArray="this.labelArray"
         :name="this.name" 
-        :holder="this.model.devices[0].consumption"
+        :holder="this.model.devices[this.deviceIndex].consumption"
         :isSignedIn=this.model.isSignedIn />
+        <div>
+            <span v-for="device in this.model.devices"><button @click="updateDevice(device.intIndex)">{{ device.name }}</button>&nbsp;</span>
+        </div>
     </div>
 </template>

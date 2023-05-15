@@ -40,6 +40,9 @@ class EnergyModel{
             if(this.devices[i].timer){
                 let diff = this.devices[i].timerEndDate - Date.now();
                 diff = Math.floor(diff/1000);
+                if(diff < 0){
+                    // this.devices[i].timer = false;
+                }
                 this.devices[i].timerCountdownValue = diff;
                 let days = Math.floor(diff/86400);
                 let hours = Math.floor((diff % 86400)/3600);
@@ -58,6 +61,8 @@ class EnergyModel{
                     countdownString = "0 seconds";
                 }
                 this.devices[i].timerCountdown = countdownString;
+            }else{
+                this.devices[i].timerCountdown = "0 seconds";
             }
         }
         this.setIntervalID = setInterval(this.updateTimerCountdown.bind(this), 1000);
@@ -118,7 +123,7 @@ class EnergyModel{
                 statusLength = this.statusSnapshot.length;
             }
             for (let i = 0; i < statusLength; i++){
-                if(this.statusSnapshot[i].isActive){
+                if(this.statusSnapshot[i].isActive && this.consumptionSnapshot[i].values !== undefined){
                     const device = {
                         id: this.statusSnapshot[i].id,
                         macAddr: this.statusSnapshot[i].macAddr,
@@ -240,6 +245,7 @@ class EnergyModel{
         }
         for (let i = 0; i < this.devices.length; i++){
             console.log(this.devices[i].id)
+            console.log(this.devices);
             this.devices[i].periodConsumption = this.devices[i].consumption.filter(this.periodCheck.bind(this));
             // this.devices[i].periodTotal = this.devices[i].periodConsumption.map()
             let holder = 0;

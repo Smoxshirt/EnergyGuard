@@ -4,6 +4,7 @@ import './main.css';
 import './mobile.css';
 import TimerView from './TimerView.vue';
 import LimitView from './LimitView.vue';
+import RenameView from './RenameView.vue';
 import { writeUserData, readUserData, setUserData } from "../firebaseModel.js"
 export default {
   methods: {
@@ -46,6 +47,7 @@ export default {
   components: {
     TimerView,
     LimitView,
+    RenameView
   },
   created(){
     console.log(this.model)
@@ -85,7 +87,8 @@ export default {
                         <span class="arrow-up" v-else></span>
                     </button>
                 </div>  
-            <div class="details" v-if="device.expanded">  
+            <div class="details" v-if="device.expanded"> 
+                <RenameView :device="device" /> 
                 <TimerView :device="device" @set-timer="setTimer" @cancel-timer="cancelTimer" />
                 <LimitView :device="device" />
             </div>

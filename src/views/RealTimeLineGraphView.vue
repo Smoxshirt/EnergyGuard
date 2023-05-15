@@ -56,7 +56,25 @@
                             events: ['click'],
                             animation: {
                                 duration: 0
-                            }
+                            },
+                            scales: {
+                                yAxes: [{
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'mWs',
+                                },
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 50
+                                }
+                                }],
+                                xAxes: [{
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Time'
+                                }
+                                }]
+                            } 
                         }
                     }
                     this.lineChart = new Chart("lineChart", chartConfig);
@@ -81,8 +99,7 @@
     </div>
 
     <div class="realtime-energy" v-if="this.isSignedIn">
-        <h1 class="nomargin-nopadding">Realtime </h1> 
-        <h1 class="nomargin-nopadding">energyconsumption mW/s</h1>
+        <h1 class="nomargin-nopadding">Realtime Energy Consumption</h1> 
         <canvas class="canvas" id="lineChart" aria-label="Test"></canvas>
     </div>
     <div style="font-size: 1px">
