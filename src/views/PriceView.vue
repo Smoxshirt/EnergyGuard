@@ -1,3 +1,8 @@
+<!-- Takes methods from priceSource displays data in chart.
+Packets have info on 24h -->
+
+
+
 <script>
     import Chart from 'chart.js';
     import './main.css';

@@ -1,3 +1,7 @@
+//Model, stores user info locally to be synced with firebase. Functions defined
+//here are used mainly in presenters.
+
+
 import { writeUserData, isLoggedIn, getEmail, readUserDataModel, listenToUserData, readUserDataOnce } from "./firebaseModel.js";
 import { getCurrentPrice } from "./priceSource.js";
 import { resolvePromise } from "./resolvePromise.js";
@@ -171,9 +175,9 @@ class EnergyModel{
     }
 
     updateStatus(snapshot){
-        console.log("Status callback");
+        //console.log("Status callback");
         var snapVal = snapshot.val();
-        console.log(snapVal);
+        //console.log(snapVal);
 
         var deviceCount = 0;
         for(let i = 0; i < snapVal.length; i++){
@@ -209,8 +213,8 @@ class EnergyModel{
     }
 
     updateConsumption(snapshot){
-        console.log("Listen callback");
-        console.log(snapshot.val());
+        //console.log("Listen callback");
+        //console.log(snapshot.val());
         if(this.hasDevices){
             for(let i = 0; i < this.devices.length; i++){
                 this.devices[i].consumption = snapshot.val()[this.devices[i].index].values;
@@ -222,8 +226,8 @@ class EnergyModel{
     updateUserStatus(){
         this.isSignedIn = isLoggedIn();
         this.emailAddress = getEmail();
-        console.log(this.isSignedIn);
-        console.log(this.emailAddress);
+        //console.log(this.isSignedIn);
+        //console.log(this.emailAddress);
     }
 
     addDeviceListToDatabase(){
@@ -244,8 +248,8 @@ class EnergyModel{
             return;
         }
         for (let i = 0; i < this.devices.length; i++){
-            console.log(this.devices[i].id)
-            console.log(this.devices);
+            //console.log(this.devices[i].id)
+            //console.log(this.devices);
             this.devices[i].periodConsumption = this.devices[i].consumption.filter(this.periodCheck.bind(this));
             // this.devices[i].periodTotal = this.devices[i].periodConsumption.map()
             let holder = 0;
@@ -306,17 +310,8 @@ class EnergyModel{
         resolvePromise(getCurrentPrice(), this.pricePromiseState)
     }
 
-    addDevice(){
 
-    }
-
-    removeDevice(){
-
-    }
-
-    updateZone(payload){
-
-    }
+    updateZone(payload){}
 
     returnZone(){
         return this.priceZone;

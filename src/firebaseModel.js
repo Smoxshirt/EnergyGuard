@@ -67,19 +67,6 @@ function resetPassword(email, callback){
     sendPasswordResetEmail(auth2, email).then(callback).catch(errorCallback);
 }
 
-/*
-export const passwordReset = async (email: string) => {
-    return await sendPasswordResetEmail(auth, email)
-  }
-
-  export const confirmThePasswordReset = async (
-    oobCode:string, newPassword:string
-  ) => {
-    if(!oobCode && !newPassword) return;
-    
-    return await confirmPasswordReset(auth, oobCode, newPassword)
-  }
-*/
 
 /*
 function payloadACB(payload){ //with observer change, changes info on firebase
@@ -93,9 +80,7 @@ function payloadACB(payload){ //with observer change, changes info on firebase
 }
 */
 
-function firebaseModelPromise(){ //make promises
-
-}
+function firebaseModelPromise(){}
 
 function updateFirebaseFromModel(){
 
@@ -113,16 +98,14 @@ function updateFirebaseFromModel(){
             if(payload.turnOnDevice){//unnecessary?
                 set(ref(db, 'users/' + auth.currentUser.uid + "/devices/" + payload.turnOnDevice.id), payload.deviceToAdd.name), {
             }
+            }   
+            }
 
-
+            model.addObserver(payloadACB)
+            }
         }
     }
-
-    model.addObserver(payloadACB)
-
 }
-        }
-    }}
 
 function updateModelFromFirebase(model){
     if(auth.currentUser){

@@ -1,3 +1,7 @@
+<!-- Binds methods from presenter to components in view
+for example buttons -->
+
+
 <script>
     import { changePassword } from '../firebaseModel';
     import './main.css';

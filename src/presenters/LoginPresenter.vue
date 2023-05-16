@@ -1,3 +1,8 @@
+<!-- Takes data from model and firebasemodel to create methods to
+send to loginView -->
+
+
+
 <script>
 import LoginView from '../views/LoginView.vue'
 import { createNewUser, signInUser, signOutUser, changePassword, resetPassword, readUserDataOnce } from '../firebaseModel';
@@ -33,7 +38,6 @@ export default {
             changePassword(pw,this.passwordChangeCallback.bind(this));
         },
         resetPassword(mail){
-            console.log(mail)
             resetPassword(mail,this.passwordResetCallback.bind(this));
         },
         signupCallback(){
@@ -43,7 +47,6 @@ export default {
             alert("Signed in!");
             this.model.isSignedIn = true;
             this.model.setEmail(credentials.user.email);
-            console.log(credentials.user.email);
             readUserDataOnce("consumption", this.consumptionCallback.bind(this));
             readUserDataOnce("status", this.statusCallback.bind(this));
         },
@@ -58,19 +61,15 @@ export default {
         },
         changePwFlag(){
             this.changeFlag=!this.changeFlag;
-            console.log(this.changeFlag)
         },
         resetPwFlag(){
             this.resetFlag=!this.resetFlag;
-            console.log(this.resetFlag)
         },
         consumptionCallback(snapshot){
-            console.log(snapshot.val());
             this.model.updateDeviceConsumption(snapshot.val());
         },
 
         statusCallback(snapshot){
-            console.log(snapshot.val());
             this.model.updateDeviceStatus(snapshot.val())
         }
     },

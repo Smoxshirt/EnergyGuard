@@ -1,3 +1,5 @@
+//function for resolving promises. Taken from tutorial in course DH2642
+
 function resolvePromise(promiseToResolve, promiseState, notify){
     if (promiseToResolve === null) {
         return;

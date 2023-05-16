@@ -1,3 +1,5 @@
+//API call from elprisetjustnu.se treatHTTPResponse() from DH2642 course
+
 import EnergyModel from "./EnergyModel";
 
 function getCurrentPrice(model){  

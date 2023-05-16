@@ -1,3 +1,5 @@
+<!-- Takes methods from priceSource and sends forward to priceView -->
+
 <script>
     import PriceView from '../views/PriceView.vue'
     import { getCurrentPrice } from '../priceSource';
