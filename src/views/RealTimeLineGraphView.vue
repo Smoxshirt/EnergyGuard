@@ -100,8 +100,7 @@
     
     <div class="general-container" v-if="this.isSignedIn">
   <div class="realtime-energy">
-        <h1 class="nomargin-nopadding">Realtime </h1> 
-        <h1 class="nomargin-nopadding">energyconsumption mW/s</h1>
+        <h1 class="nomargin-nopadding">Realtime Energy Consumpton</h1> 
         <canvas class="canvas" id="lineChart" aria-label="Test"></canvas>
     </div>
     <div style="font-size: 1px">

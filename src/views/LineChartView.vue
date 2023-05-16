@@ -39,7 +39,25 @@
                             labels: this.labelArray
                         },
                         options: {
-                            events: ['click']
+                            events: ['click'],
+                            scales: {
+                                yAxes: [{
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'mWs',
+                                },
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 50
+                                }
+                                }],
+                                xAxes: [{
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Time'
+                                }
+                                }]
+                            }
                         }
                     }
                     for (let i = 0; i < this.dataArray.length; i++){
